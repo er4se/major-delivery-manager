@@ -6,7 +6,76 @@
              xmlns:local="clr-namespace:major_delivery_manager.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Blue">
-        <Button Content="Click" Width="70" Height="20"/>
+    <Grid Background="#ECECEC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Border Background="Black">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.5" Softness="2" />
+                </Border.BitmapEffect>
+
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#ED9206" Offset="0.0"/>
+                            <GradientStop Color="White" Offset="3.0"/>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Border>
+
+            <TextBlock Foreground="White"
+                       FontSize="24"
+                       FontFamily="Roboto"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       Margin="25,0,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="250"
+                        Color="Black"
+                        Opacity="0.5"
+                        BlurRadius="1"/>
+                </TextBlock.Effect>
+                <Run Text="Главная"/>
+            </TextBlock>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="25">
+            <StackPanel.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#484848" Offset="0.0"/>
+                    <GradientStop Color="Black" Offset="3.0"/>
+                </RadialGradientBrush>
+            </StackPanel.Background>
+            
+            <Image Source="/Resources/major-logo.png" Margin="25,25,25,25"/>
+
+            <TextBlock Foreground="White" Grid.Column="1"
+                TextWrapping="Wrap"
+                FontSize="18"
+                FontFamily="Roboto"
+                FontWeight="Medium"
+                VerticalAlignment="Center"
+                Margin="25,25,25,0">
+
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="250"
+                        Color="Black"
+                        Opacity="0.5"
+                        BlurRadius="1"/>
+                </TextBlock.Effect>
+                                
+                <Run Text="Тестовое задание. Выполнил: Мащенко Александр. .NET C# WPF"/>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

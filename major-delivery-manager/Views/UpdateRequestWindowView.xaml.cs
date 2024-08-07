@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace major_delivery_manager.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UpdateRequestView.xaml
+    /// Логика взаимодействия для UpdateRequestWindowView.xaml
     /// </summary>
-    public partial class UpdateRequestView : UserControl
+    public partial class UpdateRequestWindowView : Window
     {
-        public UpdateRequestView()
+        public UpdateRequestWindowView()
         {
             InitializeComponent();
         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace major_delivery_manager.Interfaces
 {
-    internal interface ICustomer
+    interface IState<T> where T : Enum
     {
-        string Id { get; }
-        string Name { get; set; }
+        T GetState();
+        void Handle();
     }
 }

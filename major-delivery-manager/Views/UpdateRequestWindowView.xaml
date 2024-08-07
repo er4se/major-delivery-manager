@@ -1,0 +1,676 @@
+﻿<Window x:Class="major_delivery_manager.Views.UpdateRequestWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:major_delivery_manager.ViewModels"
+        xmlns:local="clr-namespace:major_delivery_manager.Views"
+        mc:Ignorable="d"
+        Title="UpdateRequestWindowView" Height="680" Width="674">
+
+    <Window.DataContext>
+        <vm:UpdateRequestViewModel/>
+    </Window.DataContext>
+
+    <Grid Background="#ECECEC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Border Background="Black">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.5" Softness="2" />
+                </Border.BitmapEffect>
+
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#ED9206" Offset="0.0"/>
+                            <GradientStop Color="White" Offset="3.0"/>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Border>
+
+            <TextBlock Foreground="White"
+                       FontSize="24"
+                       FontFamily="Roboto"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       Margin="25,0,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="250"
+                        Color="Black"
+                        Opacity="0.5"
+                        BlurRadius="1"/>
+                </TextBlock.Effect>
+                <Run Text="Изменение заявки"/>
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="25, 25, 25, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Height="35" VerticalAlignment="Bottom">
+                <!--StrokeThickness="1" Stroke="#303030"-->
+                <Grid.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#484848" Offset="0.0"/>
+                        <GradientStop Color="Black" Offset="3.0"/>
+                    </RadialGradientBrush>
+                </Grid.Background>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Foreground="White" Grid.Column="1"
+                    FontSize="14"
+                    FontFamily="Roboto"
+                    FontWeight="Medium"
+                    VerticalAlignment="Center">
+
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                            ShadowDepth="1"
+                            Direction="250"
+                            Color="Black"
+                            Opacity="0.5"
+                            BlurRadius="1"/>
+                    </TextBlock.Effect>
+                    <Run Text="Статус и доставка"/>
+                </TextBlock>
+
+                <Ellipse Grid.Column="0" Fill="#ED9206" HorizontalAlignment="Center" Height="15" Width="15"/>
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="#ACACAC" Grid.Row="1">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                </Border.BitmapEffect>
+
+                <Grid Background="#C3C3C3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0"
+                        FontSize="14"
+                        FontFamily="Roboto"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="25,0">
+
+                        <TextBlock.Effect>
+                            <DropShadowEffect
+                                ShadowDepth="1"
+                                Direction="250"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="1"/>
+                        </TextBlock.Effect>      
+                        <Run Text="Статус заявки:"/>
+                    </TextBlock>
+
+                    <TextBlock Foreground="Green" Grid.Column="1" Grid.Row="0"
+                        FontSize="14"
+                        FontFamily="Roboto"
+                        FontWeight="BOLD"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="25,0">
+
+                        <TextBlock.Effect>
+                            <DropShadowEffect
+                                ShadowDepth="1"
+                                Direction="250"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="1"/>
+                        </TextBlock.Effect>      
+                        <Run Text="НОВАЯ"/>
+                    </TextBlock>
+
+                    <Border Grid.Column="2" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                        </Border.BitmapEffect>
+                        <Button BorderThickness="0">
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#921A00" Offset="0.0"/>
+                                    <GradientStop Color="Black" Offset="5"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                    ShadowDepth="1"
+                                    Direction="250"
+                                    Color="Black"
+                                    Opacity="0.5"
+                                    BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Отменить"/>
+                            </TextBlock>
+                        </Button>
+                    </Border>
+
+                    <Border Grid.Column="3" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                        </Border.BitmapEffect>
+                        <Button BorderThickness="0">
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#ED9206" Offset="0.0"/>
+                                    <GradientStop Color="White" Offset="5"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                    ShadowDepth="1"
+                                    Direction="250"
+                                    Color="Black"
+                                    Opacity="0.5"
+                                    BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Обновить"/>
+                            </TextBlock>
+                            
+                        </Button>
+                    </Border>
+
+                    <Rectangle Width="1" Height="auto" Grid.Column="0" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
+                    <Rectangle Width="1" Height="auto" Grid.Column="1" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
+                    <Rectangle Width="1" Height="auto" Grid.Column="2" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
+
+                    <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                        FontSize="14"
+                        FontFamily="Roboto"
+                        FontWeight="Medium"
+                        VerticalAlignment="Center"
+                        Margin="25,0">
+
+                        <TextBlock.Effect>
+                            <DropShadowEffect
+                                ShadowDepth="1"
+                                Direction="250"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="1"/>
+                        </TextBlock.Effect>      
+                        <Run Text="Назначить курьера:"/>
+                    </TextBlock>
+
+                    <Rectangle Height="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 0"/>
+
+                    <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="25,0,25,10">
+                        
+                    </ComboBox>
+
+                    <Border Grid.Column="3" Grid.Row="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 0, 25, 10">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                        </Border.BitmapEffect>
+                        <Button BorderThickness="0">
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#ED9206" Offset="0.0"/>
+                                    <GradientStop Color="White" Offset="5"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                    ShadowDepth="1"
+                                    Direction="250"
+                                    Color="Black"
+                                    Opacity="0.5"
+                                    BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Назначить"/>
+                            </TextBlock>
+
+                        </Button>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <DockPanel Grid.Row="2">
+            <StackPanel DockPanel.Dock="Top">
+
+                <Border BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 0">
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                    </Border.BitmapEffect>
+
+                    <StackPanel>
+
+                        <Grid Height="35" VerticalAlignment="Bottom">
+                            <!--StrokeThickness="1" Stroke="#303030"-->
+                            <Grid.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#484848" Offset="0.0"/>
+                                    <GradientStop Color="Black" Offset="3.0"/>
+                                </RadialGradientBrush>
+                            </Grid.Background>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Foreground="White" Grid.Column="1"
+                                FontSize="14"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Параметры посылки"/>
+                            </TextBlock>
+
+                            <Ellipse Grid.Column="0" Fill="#ED9206" HorizontalAlignment="Center" Height="15" Width="15"/>
+
+                        </Grid>
+
+                        <Grid Background="#C3C3C3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="36"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="36"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0"
+                                FontSize="14"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="25,10,0,5">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Откуда"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="2" Grid.Row="0"
+                                FontSize="14"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="1,10,0,5">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Куда"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="1"
+                                FontSize="10"
+                                FontFamily="Roboto"
+                                FontWeight="Normal"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Страна:"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="2" Grid.Row="1"
+                                FontSize="10"
+                                FontFamily="Roboto"
+                                FontWeight="Normal"
+                                VerticalAlignment="Center"
+                                Margin="1,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Страна:"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="3"
+                                FontSize="10"
+                                FontFamily="Roboto"
+                                FontWeight="Normal"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Город:"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="2" Grid.Row="3"
+                                FontSize="10"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="1,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Город:"/>
+                            </TextBlock>
+
+                            <TextBox Grid.Row="2" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Row="4" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Row="2" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Row="4" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <Image Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Margin="20" Source="/Resources/double-arrow.png"/>
+
+                            <Rectangle Height="1" Grid.ColumnSpan="3" Grid.Row="5" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 10"/>
+
+                        </Grid>
+
+                        <Grid Background="#C3C3C3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0"
+                                FontSize="12"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Вес, кг"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="1" Grid.Row="0"
+                                FontSize="12"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Объем, м3"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="2" Grid.Row="0"
+                                FontSize="12"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Стоимость, руб"/>
+                            </TextBlock>
+
+                            <TextBlock Foreground="#303030" Grid.Column="3" Grid.Row="0"
+                                FontSize="12"
+                                FontFamily="Roboto"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0">
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                        ShadowDepth="1"
+                                        Direction="250"
+                                        Color="Black"
+                                        Opacity="0.5"
+                                        BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Кол-во, шт"/>
+                            </TextBlock>
+
+                            <TextBox Grid.Column="0" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Column="1" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Column="2" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                            <TextBox Grid.Column="3" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                                <TextBox.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#484848" Offset="0.0"/>
+                                        <GradientStop Color="Black" Offset="3.0"/>
+                                    </RadialGradientBrush>
+                                </TextBox.Background>
+                            </TextBox>
+
+                        </Grid>
+                        <!--Stroke="#ACACAC"-->
+
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+            <Grid Height="65">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="155"/>
+                    <ColumnDefinition Width="180"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 0, 15">
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                    </Border.BitmapEffect>
+                    <Button BorderThickness="0">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#921A00" Offset="0.0"/>
+                                <GradientStop Color="Black" Offset="5"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                        <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                            <TextBlock.Effect>
+                                <DropShadowEffect
+                                ShadowDepth="1"
+                                Direction="250"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="1"/>
+                            </TextBlock.Effect>
+                        <Run Text="Сбросить"/>
+                        </TextBlock>
+                    </Button>
+                </Border>
+
+                <Border Grid.Column="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                    </Border.BitmapEffect>
+                    <Button BorderThickness="0">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#ED9206" Offset="0.0"/>
+                                <GradientStop Color="White" Offset="5"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                        <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                            <TextBlock.Effect>
+                                <DropShadowEffect
+                                ShadowDepth="1"
+                                Direction="250"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="1"/>
+                            </TextBlock.Effect>
+                        <Run Text="Сохранить"/>
+                        </TextBlock>
+                    </Button>
+                </Border>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Resources\double-arrow.png" />
     <None Remove="Resources\major-logo.png" />
+    <None Remove="Resources\search-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
   <ItemGroup>
     <Resource Include="Resources\double-arrow.png" />
     <Resource Include="Resources\major-logo.png" />
+    <Resource Include="Resources\search-icon.png" />
   </ItemGroup>
 
 </Project>

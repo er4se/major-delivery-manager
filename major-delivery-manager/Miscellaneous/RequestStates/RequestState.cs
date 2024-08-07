@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace major_delivery_manager.Models
+namespace major_delivery_manager
 {
-    enum CourierState
+    enum RequestState
     {
-        AVAILABLE,
-        BUSY,
-        OUTOFSERVICE
+        NEW,
+        INPROCCESS,
+        DONE,
+        CANCELED
     }
 }

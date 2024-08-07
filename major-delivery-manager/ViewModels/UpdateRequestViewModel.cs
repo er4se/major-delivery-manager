@@ -4,18 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using major_delivery_manager.Views;
 
 namespace major_delivery_manager.ViewModels
 {
     public class UpdateRequestViewModel : BindableBase
     {
-        private IMainWindowsCodeBehind mainCodeBehind;
+        //private IMainWindowsCodeBehind mainCodeBehind;
+        //
+        //public UpdateRequestViewModel(IMainWindowsCodeBehind codeBehind)
+        //{
+        //    if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
+        //
+        //    mainCodeBehind = codeBehind;
+        //}
 
-        public UpdateRequestViewModel(IMainWindowsCodeBehind codeBehind)
-        {
-            if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
-
-            mainCodeBehind = codeBehind;
-        }
+        //public UpdateRequestViewModel()
+        //{
+        //
+        //}
     }
 }

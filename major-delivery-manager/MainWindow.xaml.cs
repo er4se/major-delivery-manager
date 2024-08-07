@@ -53,10 +53,10 @@ namespace major_delivery_manager
                     break;
 
                 case ViewType.UPDATE:
-                    UpdateRequestView updateView = new UpdateRequestView();
-                    UpdateRequestViewModel updateVM = new UpdateRequestViewModel(this);
-                    updateView.DataContext = updateVM;
-                    this.OutputView.Content = updateView;
+                    //UpdateRequestView updateView = new UpdateRequestView();
+                    //UpdateRequestViewModel updateVM = new UpdateRequestViewModel(this);
+                    //updateView.DataContext = updateVM;
+                    //this.OutputView.Content = updateView;
                     break;
 
                 case ViewType.REGISTRY:
