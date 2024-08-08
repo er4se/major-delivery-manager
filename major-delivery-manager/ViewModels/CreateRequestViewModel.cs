@@ -55,10 +55,5 @@ namespace major_delivery_manager.ViewModels
                 RaisePropertyChanged(nameof(DeliveryRequestModel));
             }
         }
-        public ObservableCollection<DeliveryRequestModel> CreateRequests { get; set; }
-
-        ApplicationContext db = new ApplicationContext();
-
-        public DelegateCommand createCommand { get; }
     }
 }
