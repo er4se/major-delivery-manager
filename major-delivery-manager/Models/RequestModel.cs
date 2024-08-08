@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace major_delivery_manager.Models
 {
-    class RequestModel
+    internal class RequestModel
     {
         private IState<RequestState> _state;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace major_delivery_manager.Models
 {
-    class CourierModel
+    internal class CourierModel
     {
     }
 }

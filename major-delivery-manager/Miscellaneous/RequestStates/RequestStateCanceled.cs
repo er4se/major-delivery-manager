@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace major_delivery_manager
 {
-    class RequestStateCanceled : IState<RequestState>
+    internal class RequestStateCanceled : IState<RequestState>
     {
         public void Handle() { }
         public RequestState GetState()

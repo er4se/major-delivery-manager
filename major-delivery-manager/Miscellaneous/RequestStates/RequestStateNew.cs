@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace major_delivery_manager
 {
-    class RequestStateNew : IState<RequestState>
+    internal class RequestStateNew : IState<RequestState>
     {
         public void Handle() { }
         public RequestState GetState()

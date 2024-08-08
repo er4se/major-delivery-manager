@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace major_delivery_manager.AppDbContext
 {
-    public class ApplicationContext : DbContext
+    internal class ApplicationContext : DbContext
     {
-        public DbSet<DeliveryRequestModel> Requests { get; set; } = null!;
+        public DbSet<RequestModel> Requests { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=major-delivery-database-test.db");
