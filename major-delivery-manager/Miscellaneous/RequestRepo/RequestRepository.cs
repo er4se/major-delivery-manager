@@ -14,13 +14,15 @@ namespace major_delivery_manager
     {
         private readonly ApplicationContext _DbContext;
 
-        public RequestRepository(ApplicationContext context)
+        public RequestRepository()
         {
-            _DbContext = context;
+            _DbContext = new ApplicationContext();
         }
 
         public RequestModel GetById(string id)
         {
+            _DbContext.Database.EnsureCreated();
+
             if (_DbContext.Requests.Find(id) != null)
             {
                 return _DbContext.Requests.Find(id);
@@ -31,6 +33,9 @@ namespace major_delivery_manager
 
         public void Create(RequestModel entity)
         {
+            _DbContext.Database.EnsureCreated();
+            _DbContext.Requests.Load();
+
             if (entity != null)
             {
                 _DbContext.Requests.Add(entity);
@@ -41,6 +46,8 @@ namespace major_delivery_manager
 
         public void Update(RequestModel entity)
         {
+            _DbContext.Database.EnsureCreated();
+
             if (entity != null)
             {
                 if (_DbContext.Requests.Find(entity.Id) != null)
@@ -48,12 +55,16 @@ namespace major_delivery_manager
                     _DbContext.Requests.Update(entity);
                 }
             }
+
+            Save();
         }
 
         public void Delete(RequestModel entity)
         {
+            _DbContext.Database.EnsureCreated();
             _DbContext.Requests.Remove(entity);
-            _DbContext.SaveChanges();
+            
+            Save();
         }
 
         public void Save()

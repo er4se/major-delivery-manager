@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace major_delivery_manager.Models
 {
@@ -11,15 +14,25 @@ namespace major_delivery_manager.Models
     {
         private IState<RequestState> _state;
 
-        public string Id { get; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [Required]
         public string ToCountry { get; set; } = string.Empty;
+        [Required]
         public string FromCountry { get; set; } = string.Empty;
+        [Required]
         public string ToSattlement { get; set; } = string.Empty;
+        [Required]
         public string FromSattlement { get; set; } = string.Empty;
+        [Required]
         public int Weight { get; set; }
+        [Required]
         public int Volume { get; set; }
+        [Required]
         public int Cost { get; set; }
+        [Required]
         public int Amount { get; set; }
+        [NotMapped]
         public CourierModel Responsible { get; set; }
 
         public RequestModel()
