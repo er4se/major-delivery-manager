@@ -12,14 +12,15 @@ using Prism.Commands;
 using System.Windows;
 using System.Reflection;
 using System.Configuration;
+using major_delivery_manager.Interfaces;
 
 namespace major_delivery_manager.ViewModels
 {
-    public class CreateRequestViewModel : BindableBase
+    internal class CreateRequestViewModel : BindableBase
     {
         private IMainWindowsCodeBehind mainCodeBehind;
-        private RequestModel newRequest;
-        private RequestRepository repository;
+        
+        private IRepository<RequestModel> repository;
 
         private DelegateCommand createRequestCommand;
         public DelegateCommand CreateRequestCommand
@@ -38,119 +39,15 @@ namespace major_delivery_manager.ViewModels
                 return abortRequestCommand ?? (new DelegateCommand(OnAbortRequest, CanAbortRequest));
             }
         }
-
-        public string ToCountry
+        
+        private RequestModel request;
+        public RequestModel Request
         {
-            get => newRequest.ToCountry; 
+            get => request;
             set
             {
-                newRequest.ToCountry = value;
-                RaisePropertyChanged(nameof(ToCountry));
-            }
-        }
-
-        public string FromCountry
-        {
-            get => newRequest.FromCountry;
-            set
-            {
-                newRequest.FromCountry = value;
-                RaisePropertyChanged(nameof(FromCountry));
-            }
-        }
-
-        public string ToSattlement
-        {
-            get => newRequest.ToSattlement;
-            set
-            {
-                newRequest.ToSattlement = value;
-                RaisePropertyChanged(nameof(ToSattlement));
-            }
-        }
-
-        public string FromSattlement
-        {
-            get => newRequest.FromSattlement;
-            set
-            {
-                newRequest.FromSattlement = value;
-                RaisePropertyChanged(nameof(FromSattlement));
-            }
-        }
-
-        public string Weight
-        {
-            get => newRequest.Weight.ToString();
-            set
-            {
-                try
-                {
-                    newRequest.Weight = Convert.ToInt32(value);
-                    RaisePropertyChanged(nameof(Weight));
-                }
-                catch
-                {
-                    if (value != string.Empty)
-                        MessageBox.Show("Неверный формат");
-                }
-                
-            }
-        }
-
-        public string Volume
-        {
-            get => newRequest.Volume.ToString();
-            set
-            {
-                try
-                {
-                    newRequest.Volume = Convert.ToInt32(value);
-                    RaisePropertyChanged(nameof(Volume));
-                }
-                catch
-                {
-                    if (value != string.Empty)
-                        MessageBox.Show("Неверный формат");
-                }
-            }
-        }
-
-        public string Cost
-        {
-            get => newRequest.Cost.ToString();
-            set
-            {
-                try
-                {
-                    newRequest.Cost = Convert.ToInt32(value);
-                    RaisePropertyChanged(nameof(Cost));
-                }
-                catch
-                {
-                    if (value != string.Empty)
-                        MessageBox.Show("Неверный формат");
-                }
-
-            }
-        }
-
-        public string Amount
-        {
-            get => newRequest.Amount.ToString();
-            set
-            {
-                try
-                {
-                    newRequest.Amount = Convert.ToInt32(value);
-                    RaisePropertyChanged(nameof(Amount));
-                }
-                catch
-                {
-                    if (value != string.Empty)
-                        MessageBox.Show("Неверный формат");
-                }
-
+                request = value;
+                RaisePropertyChanged(nameof(Request));
             }
         }
 
@@ -160,31 +57,32 @@ namespace major_delivery_manager.ViewModels
 
             mainCodeBehind = codeBehind;
 
-            newRequest = new RequestModel();
+            Request = new RequestModel();
             repository = new RequestRepository();
         }
 
         private bool CanCreateRequest() => true;
 
-        private void OnCreateRequest()
+        private async void OnCreateRequest()
         {
-            if ((ToCountry == string.Empty)
-                    || (ToSattlement == string.Empty)
-                    || (FromCountry == string.Empty)
-                    || (FromSattlement == string.Empty)
-                    || (Weight == "0")
-                    || (Volume == "0")
-                    || (Cost == "0")
-                    || (Amount == "0"))
+            bool flag = true;
+            foreach(PropertyInfo prop in Request.GetType().GetProperties())
+            {
+                var value = prop.GetValue(Request);
+
+                if (prop.PropertyType.Name == nameof(String))
+                    if (string.IsNullOrEmpty((string)value)) flag = false;
+            }
+
+            if (!flag) 
             {
                 MessageBox.Show("Не все поля заполнены!");
             }
-
             else
             {
                 try
                 {
-                    repository.Create(newRequest);
+                    await repository.Create(Request);
                     Clear();
                 
                     MessageBox.Show("Успех!");
@@ -205,14 +103,7 @@ namespace major_delivery_manager.ViewModels
 
         public void Clear()
         {
-            ToCountry       = string.Empty;
-            ToSattlement    = string.Empty;
-            FromCountry     = string.Empty;
-            FromSattlement  = string.Empty;
-            Weight          = "0";
-            Volume          = "0";
-            Cost            = "0";
-            Amount          = "0";
+            Request = new RequestModel();
         }
     }
 }

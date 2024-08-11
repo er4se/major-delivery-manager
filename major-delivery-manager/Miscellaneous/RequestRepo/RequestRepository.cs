@@ -1,8 +1,10 @@
 ﻿using major_delivery_manager.AppDbContext;
+using major_delivery_manager.Interfaces;
 using major_delivery_manager.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ using System.Windows;
 
 namespace major_delivery_manager
 {
-    internal class RequestRepository
+    internal class RequestRepository : IRepository<RequestModel>
     {
         private readonly ApplicationContext _DbContext;
 
@@ -19,7 +21,14 @@ namespace major_delivery_manager
             _DbContext = new ApplicationContext();
         }
 
-        public RequestModel GetById(string id)
+        public IEnumerable<RequestModel> GetAll()
+        {
+            _DbContext.Database.EnsureCreated();
+            _DbContext.Requests.Load();
+            return _DbContext.Requests.Local.ToObservableCollection();
+        }
+
+        public RequestModel? GetById(string id)
         {
             _DbContext.Database.EnsureCreated();
 
@@ -28,32 +37,30 @@ namespace major_delivery_manager
                 return _DbContext.Requests.Find(id);
             }
             
-            return new RequestModel();
+            return null;
         }
 
-        public void Create(RequestModel entity)
+        public async Task Create(RequestModel entity)
         {
-            _DbContext.Database.EnsureCreated();
-            _DbContext.Requests.Load();
+            await _DbContext.Database.EnsureCreatedAsync();
+            await _DbContext.Requests.LoadAsync();
 
             if (entity != null)
             {
-                _DbContext.Requests.Add(entity);
+                await _DbContext.Requests.AddAsync(entity);
             }
 
             Save();
         }
 
-        public void Update(RequestModel entity)
+        public async Task Update(RequestModel entity)
         {
-            _DbContext.Database.EnsureCreated();
+            await _DbContext.Database.EnsureCreatedAsync();
+            await _DbContext.Requests.LoadAsync();
 
-            if (entity != null)
+            if(GetById(entity.Id) != null)
             {
-                if (_DbContext.Requests.Find(entity.Id) != null)
-                {
-                    _DbContext.Requests.Update(entity);
-                }
+                _DbContext.Requests.Update(entity);
             }
 
             Save();

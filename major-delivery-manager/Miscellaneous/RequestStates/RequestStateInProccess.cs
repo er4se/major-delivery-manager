@@ -9,7 +9,7 @@ namespace major_delivery_manager
 {
     internal class RequestStateInProccess : IState<RequestState>
     {
-        public void Handle() { }
+        public string Handle() => "ВЫПОЛНЯЕТСЯ";
         public RequestState GetState()
         {
             return RequestState.INPROCCESS;

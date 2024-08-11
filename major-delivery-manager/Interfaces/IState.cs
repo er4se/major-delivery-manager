@@ -9,6 +9,6 @@ namespace major_delivery_manager
     interface IState<T> where T : Enum
     {
         T GetState();
-        void Handle();
+        string Handle();
     }
 }

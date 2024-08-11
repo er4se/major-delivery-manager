@@ -9,7 +9,7 @@ namespace major_delivery_manager
 {
     internal class RequestStateNew : IState<RequestState>
     {
-        public void Handle() { }
+        public string Handle() => "НОВАЯ";
         public RequestState GetState()
         {
             return RequestState.NEW;

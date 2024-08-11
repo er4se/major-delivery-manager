@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using major_delivery_manager.Views;
+using major_delivery_manager.Models;
+using System.Windows;
 
 namespace major_delivery_manager.ViewModels
 {
-    public class UpdateRequestViewModel : BindableBase
+    internal class UpdateRequestViewModel : BindableBase
     {
         //private IMainWindowsCodeBehind mainCodeBehind;
         //
@@ -23,5 +25,22 @@ namespace major_delivery_manager.ViewModels
         //{
         //
         //}
+
+        private RequestModel request;
+        public RequestModel Request 
+        {
+            get => request;
+            set
+            {
+                request = value;
+                RaisePropertyChanged(nameof(Request));
+            }
+        }
+
+        public UpdateRequestViewModel(RequestModel request)
+        {
+            Request = request;
+            MessageBox.Show(Request.FromSettlement);
+        }
     }
 }

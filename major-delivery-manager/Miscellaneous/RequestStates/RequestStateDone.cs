@@ -9,7 +9,7 @@ namespace major_delivery_manager
 {
     internal class RequestStateDone : IState<RequestState>
     {
-        public void Handle() { }
+        public string Handle() => "ВЫПОЛНЕНА";
         public RequestState GetState()
         {
             return RequestState.DONE;

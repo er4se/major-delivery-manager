@@ -6,35 +6,114 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using major_delivery_manager.Views;
+using major_delivery_manager.Interfaces;
+using major_delivery_manager.Models;
+using System.Collections.ObjectModel;
+using System.Security;
+using System.Reflection;
 
 namespace major_delivery_manager.ViewModels
 {
-    class RegistryControlViewModel : BindableBase
+    internal class RegistryControlViewModel : BindableBase
     {
         private IMainWindowsCodeBehind mainCodeBehind;
         public IMainWindowsCodeBehind CodeBehind { get; set; }
+
+        private IRepository<RequestModel> repository;
+
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get => searchTerm;
+            set
+            {
+                searchTerm = value;
+                RaisePropertyChanged(nameof(SearchTerm));
+                RaisePropertyChanged(nameof(FilteredRegistry));
+            }
+        }
+
+        private DelegateCommand<RequestModel> loadUpdateVMCommand;
+        public DelegateCommand<RequestModel> LoadUpdateVMCommand
+        {
+            get
+            {
+                if (loadUpdateVMCommand == null)
+                {
+                    loadUpdateVMCommand = new DelegateCommand<RequestModel>(OnLoadUpdateVM);
+                }
+                return loadUpdateVMCommand;
+            }
+        }
+
+        private DelegateCommand filterRegistryCommand;
+        public DelegateCommand FilterRegistryCommand
+        {
+            get
+            {
+                if (filterRegistryCommand == null)
+                {
+                    filterRegistryCommand = new DelegateCommand(OnFilterRegistry);
+                }
+
+                return filterRegistryCommand;
+            }
+        }
+
+        private ObservableCollection<RequestModel> registry;
+        public ObservableCollection<RequestModel> Registry
+        {
+            get => registry;
+            set
+            {
+                registry = value;
+                RaisePropertyChanged(nameof(Registry));
+            }
+        }
+
+        private ObservableCollection<RequestModel> filteredRegistry;
+        public ObservableCollection<RequestModel> FilteredRegistry
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(SearchTerm))
+                    return Registry;
+
+                return new ObservableCollection<RequestModel>(Registry.Where(request => ContainsSearchTerm(request)));
+            }
+        }
 
         public RegistryControlViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
 
             mainCodeBehind = codeBehind;
+
+            repository = new RequestRepository();
+            Registry = new ObservableCollection<RequestModel>(repository.GetAll());
         }
 
-        private DelegateCommand loadUpdateVMCommand;
-        public DelegateCommand LoadUpdateVMCommand
-        {
-            get
-            {
-                return loadUpdateVMCommand ?? (new DelegateCommand(OnLoadUpdateVM, CanLoadUpdateVM));
-            }
-        }
-        
-        private bool CanLoadUpdateVM() => true;
-        private void OnLoadUpdateVM()
+        private void OnLoadUpdateVM(RequestModel request)
         {
             UpdateRequestWindowView instance = new UpdateRequestWindowView();
+            instance.DataContext = new UpdateRequestViewModel(request);
             instance.Show();
+        }
+
+        private void OnFilterRegistry()
+        {
+            RaisePropertyChanged(nameof(FilteredRegistry));
+        }
+
+        private bool ContainsSearchTerm(RequestModel request)
+        {
+            foreach(PropertyInfo prop in request.GetType().GetProperties())
+            {
+                if (prop.GetValue(request)?.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) == true)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace major_delivery_manager
 {
     internal class RequestStateCanceled : IState<RequestState>
     {
-        public void Handle() { }
+        public string Handle() => "ОТМЕНЕНА";
         public RequestState GetState()
         {
             return RequestState.CANCELED;

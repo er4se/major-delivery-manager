@@ -8,10 +8,6 @@
         mc:Ignorable="d"
         Title="UpdateRequestWindowView" Height="680" Width="674">
 
-    <Window.DataContext>
-        <vm:UpdateRequestViewModel/>
-    </Window.DataContext>
-
     <Grid Background="#ECECEC">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

@@ -223,7 +223,7 @@
                                 <Run Text="Город:"/>
                             </TextBlock>
 
-                            <TextBox Text="{Binding Path=FromCountry, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.FromCountry, Mode=TwoWay}" 
                                 Grid.Row="2" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -233,7 +233,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=FromSattlement, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.FromSettlement, Mode=TwoWay}" 
                                 Grid.Row="4" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -243,7 +243,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=ToCountry, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.ToCountry, Mode=TwoWay}" 
                                 Grid.Row="2" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -253,7 +253,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=ToSattlement, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.ToSettlement, Mode=TwoWay}" 
                                 Grid.Row="4" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -358,7 +358,7 @@
                                 <Run Text="Кол-во, шт"/>
                             </TextBlock>
 
-                            <TextBox Text="{Binding Path=Weight, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.Weight, Mode=TwoWay}" 
                                 Grid.Column="0" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -368,7 +368,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=Volume, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.Volume, Mode=TwoWay}" 
                                 Grid.Column="1" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -378,7 +378,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=Cost, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.Selfcost, Mode=TwoWay}" 
                                 Grid.Column="2" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
@@ -388,7 +388,7 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Text="{Binding Path=Amount, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Path=Request.Amount, Mode=TwoWay}" 
                                 Grid.Column="3" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
