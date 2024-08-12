@@ -12,6 +12,8 @@ using System.Collections.ObjectModel;
 using System.Security;
 using System.Reflection;
 
+//LINQ for searching could be good
+
 namespace major_delivery_manager.ViewModels
 {
     internal class RegistryControlViewModel : BindableBase

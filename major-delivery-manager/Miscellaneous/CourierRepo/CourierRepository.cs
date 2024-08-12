@@ -12,55 +12,55 @@ using System.Windows;
 
 namespace major_delivery_manager
 {
-    internal class RequestRepository : IRepository<RequestModel>
+    internal class CourierRepository : IRepository<CourierModel>
     {
         private readonly ApplicationContext _DbContext;
 
-        public RequestRepository()
+        public CourierRepository()
         {
             _DbContext = new ApplicationContext();
         }
 
-        public IEnumerable<RequestModel> GetAll()
+        public IEnumerable<CourierModel> GetAll()
         {
             _DbContext.Database.EnsureCreated();
-            _DbContext.Requests.Load();
-            return _DbContext.Requests.Local.ToObservableCollection();
+            _DbContext.Couriers.Load();
+            return _DbContext.Couriers.Local.ToObservableCollection();
         }
 
-        public RequestModel? GetById(string id)
+        public CourierModel? GetById(string id)
         {
             _DbContext.Database.EnsureCreated();
 
-            if (_DbContext.Requests.Find(id) != null)
+            if (_DbContext.Couriers.Find(id) != null)
             {
-                return _DbContext.Requests.Find(id);
+                return _DbContext.Couriers.Find(id);
             }
-            
+
             return null;
         }
 
-        public async Task Create(RequestModel entity)
+        public async Task Create(CourierModel entity)
         {
             await _DbContext.Database.EnsureCreatedAsync();
-            await _DbContext.Requests.LoadAsync();
+            await _DbContext.Couriers.LoadAsync();
 
             if (entity != null)
             {
-                await _DbContext.Requests.AddAsync(entity);
+                await _DbContext.Couriers.AddAsync(entity);
             }
 
             Save();
         }
 
-        public async Task Update(RequestModel entity)
+        public async Task Update(CourierModel entity)
         {
             await _DbContext.Database.EnsureCreatedAsync();
-            await _DbContext.Requests.LoadAsync();
+            await _DbContext.Couriers.LoadAsync();
 
             var realEntity = GetById(entity.Id);
 
-            if(realEntity != null)
+            if (realEntity != null)
             {
                 _DbContext.Entry(realEntity).CurrentValues.SetValues(entity);
             }
@@ -68,11 +68,11 @@ namespace major_delivery_manager
             Save();
         }
 
-        public void Delete(RequestModel entity)
+        public void Delete(CourierModel entity)
         {
             _DbContext.Database.EnsureCreated();
-            _DbContext.Requests.Remove(entity);
-            
+            _DbContext.Couriers.Remove(entity);
+
             Save();
         }
 

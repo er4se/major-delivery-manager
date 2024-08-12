@@ -51,7 +51,7 @@
             </Border>
             
             <!--Кнопка перехода к созданию заявки-->
-            
+
             <Border Background="Black">
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="270" ShadowDepth="2" Opacity="0.5" Softness="2" />
@@ -74,34 +74,6 @@
                                 BlurRadius="1"/>
                         </TextBlock.Effect>
                         <Run Text="Создать заявку"/>
-                    </TextBlock>
-                </Button>
-            </Border>
-            
-            <!--Кнопка перехода к редактированию-->
-
-            <Border Background="Black">
-                <Border.BitmapEffect>
-                    <DropShadowBitmapEffect Color="Black" Direction="270" ShadowDepth="2" Opacity="0.5" Softness="2" />
-                </Border.BitmapEffect>
-                <Button Command="{Binding LoadUpdateVMCommand, Mode=OneTime}"
-                        Width="180" Height="50" BorderThickness="1" BorderBrush="#303030">
-                    <Button.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color="#484848" Offset="0.0"/>
-                            <GradientStop Color="Black" Offset="5"/>
-                        </RadialGradientBrush>
-                    </Button.Background>
-                    <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto">
-                        <TextBlock.Effect>
-                            <DropShadowEffect
-                                ShadowDepth="1"
-                                Direction="250"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="1"/>
-                        </TextBlock.Effect>
-                        <Run Text="Обновить заявку"/>
                     </TextBlock>
                 </Button>
             </Border>

@@ -144,7 +144,7 @@
                                 Opacity="0.5"
                                 BlurRadius="1"/>
                         </TextBlock.Effect>      
-                        <Run Text="НОВАЯ"/>
+                        <Run Text="{Binding Request.Status}"/>
                     </TextBlock>
 
                     <Border Grid.Column="2" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
@@ -224,9 +224,39 @@
 
                     <Rectangle Height="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 0"/>
 
-                    <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="25,0,25,10">
+                    <ComboBox ItemsSource="{Binding Couriers}" DisplayMemberPath="FullName"
+                        SelectedItem="{Binding Path=Courier, Mode=OneWayToSource}"
+                        Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="25,0,25,10">
                         
                     </ComboBox>
+
+                    <Border Grid.Column="2" Grid.Row="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 0, 25, 10">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                        </Border.BitmapEffect>
+                        <Button Command="{Binding LoadAddCourier}"
+                            BorderThickness="0">
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#ED9206" Offset="0.0"/>
+                                    <GradientStop Color="White" Offset="5"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect
+                                    ShadowDepth="1"
+                                    Direction="250"
+                                    Color="Black"
+                                    Opacity="0.5"
+                                    BlurRadius="1"/>
+                                </TextBlock.Effect>
+                                
+                                <Run Text="Добавить"/>
+                            </TextBlock>
+
+                        </Button>
+                    </Border>
 
                     <Border Grid.Column="3" Grid.Row="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 0, 25, 10">
                         <Border.BitmapEffect>
@@ -435,7 +465,8 @@
                                 <Run Text="Город:"/>
                             </TextBlock>
 
-                            <TextBox Grid.Row="2" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.FromCountry, Mode=TwoWay}"
+                                Grid.Row="2" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -444,7 +475,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Row="4" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.FromSettlement, Mode=TwoWay}"
+                                Grid.Row="4" Grid.Column="0" Margin="24, 5, 0, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -453,7 +485,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Row="2" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.ToCountry, Mode=TwoWay}" 
+                                Grid.Row="2" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -462,7 +495,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Row="4" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.ToSettlement, Mode=TwoWay}"
+                                Grid.Row="4" Grid.Column="2" Margin="0, 5, 24, 5" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -566,7 +600,8 @@
                                 <Run Text="Кол-во, шт"/>
                             </TextBlock>
 
-                            <TextBox Grid.Column="0" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.Weight, Mode=TwoWay}"
+                                Grid.Column="0" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -575,7 +610,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Column="1" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.Volume, Mode=TwoWay}"
+                                Grid.Column="1" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -584,7 +620,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Column="2" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.Selfcost, Mode=TwoWay}"
+                                Grid.Column="2" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -593,7 +630,8 @@
                                 </TextBox.Background>
                             </TextBox>
 
-                            <TextBox Grid.Column="3" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
+                            <TextBox Text="{Binding Request.Amount, Mode=TwoWay}" 
+                                Grid.Column="3" Grid.Row="1" Margin="25, 10, 25, 15" Foreground="White" Padding="3" CaretBrush="White">
                                 <TextBox.Background>
                                     <RadialGradientBrush>
                                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -646,7 +684,8 @@
                     <Border.BitmapEffect>
                         <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                     </Border.BitmapEffect>
-                    <Button BorderThickness="0">
+                    <Button Command="{Binding UpdateRequestCommand}" 
+                        BorderThickness="0">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="#ED9206" Offset="0.0"/>
