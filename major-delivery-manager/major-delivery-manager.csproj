@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\add-icon.png" />
+    <None Remove="Resources\attach-icon.png" />
     <None Remove="Resources\double-arrow.png" />
     <None Remove="Resources\major-logo.png" />
+    <None Remove="Resources\refresh-icon.png" />
     <None Remove="Resources\search-icon.png" />
   </ItemGroup>
 
@@ -24,8 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\add-icon.png" />
+    <Resource Include="Resources\attach-icon.png" />
     <Resource Include="Resources\double-arrow.png" />
     <Resource Include="Resources\major-logo.png" />
+    <Resource Include="Resources\refresh-icon.png" />
     <Resource Include="Resources\search-icon.png" />
   </ItemGroup>
 

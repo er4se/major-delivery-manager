@@ -11,6 +11,7 @@ using major_delivery_manager.Models;
 using System.Collections.ObjectModel;
 using System.Security;
 using System.Reflection;
+using System.Windows;
 
 //LINQ for searching could be good
 
@@ -62,6 +63,20 @@ namespace major_delivery_manager.ViewModels
             }
         }
 
+        private DelegateCommand<RequestModel> deleteRequestCommand;
+        public DelegateCommand<RequestModel> DeleteRequestCommand
+        {
+            get
+            {
+                if (deleteRequestCommand == null)
+                {
+                    deleteRequestCommand = new DelegateCommand<RequestModel>(OnDeleteRequest);
+                }
+
+                return deleteRequestCommand;
+            }
+        }
+
         private ObservableCollection<RequestModel> registry;
         public ObservableCollection<RequestModel> Registry
         {
@@ -105,6 +120,20 @@ namespace major_delivery_manager.ViewModels
         private void OnFilterRegistry()
         {
             RaisePropertyChanged(nameof(FilteredRegistry));
+        }
+
+        private void OnDeleteRequest(RequestModel request)
+        {
+            if ((request.GetState() == RequestState.CANCELED) || (request.GetState() == RequestState.DONE))
+            {
+                repository.Delete(request);
+                Registry = new ObservableCollection<RequestModel>(repository.GetAll());
+                OnFilterRegistry();
+            }
+            else
+            {
+                MessageBox.Show("Возможно удаление только выполненых и отмененных заявок");
+            }
         }
 
         private bool ContainsSearchTerm(RequestModel request)

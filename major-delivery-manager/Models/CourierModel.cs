@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
 using major_delivery_manager.Interfaces;
+using System.Windows;
 
 namespace major_delivery_manager.Models
 {
@@ -39,19 +40,38 @@ namespace major_delivery_manager.Models
             deliverCommand = new DeliverRequestCommand();
         }
 
-        public void AcceptRequest(RequestModel request)
+        public CourierModel(CourierModel model)
         {
-            acceptCommand.Execute(request);
+            this.Id = model.Id;
+            this.FullName = model.FullName;
+
+            acceptCommand = new AcceptRequestCommand();
+            cancelCommand = new CancelRequestCommand();
+            deliverCommand = new DeliverRequestCommand();
         }
 
-        public void CancelRequest(RequestModel request) 
-        { 
-            cancelCommand.Execute(request); 
+        public void ExecuteCommand(RequestModel request)
+        {
+            switch (request.GetState())
+            {
+                case RequestState.NEW:
+                    acceptCommand.Execute(request);
+                    break;
+                case RequestState.INPROCCESS:
+                    deliverCommand.Execute(request);
+                    break;
+                case RequestState.DONE:
+                    MessageBox.Show("Доставка выполнена!");
+                    break;
+                case RequestState.CANCELED:
+                    MessageBox.Show("Заявка отменена!");
+                    break;
+            }
         }
 
-        public void DeliverRequest(RequestModel request)
+        public void CancelCommand(RequestModel request)
         {
-            deliverCommand.Execute(request);
+            cancelCommand.Execute(request);
         }
     }
 }

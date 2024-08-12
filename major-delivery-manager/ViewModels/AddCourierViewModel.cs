@@ -48,6 +48,8 @@ namespace major_delivery_manager.ViewModels
             {
                 await repository.Create(Courier);
                 MessageBox.Show("Курьер добавлен!");
+
+                Courier = new CourierModel();
             }
             else
                 MessageBox.Show("Не все поля заполнены");

@@ -144,15 +144,17 @@
                         <DataTemplate>
                             <Grid Height="50" Background="#E6E6E6" Margin="3">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="auto" MinWidth="150"/>
                                     <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="auto" MinWidth="150"/>
+                                    <ColumnDefinition Width="auto" MinWidth="150"/>
+                                    <ColumnDefinition Width="auto" MinWidth="150"/>
+                                    <ColumnDefinition Width="auto" MinWidth="100"/>
+                                    <ColumnDefinition Width="auto" MinWidth="100"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Foreground="#303030" Grid.Column="0"
+                                    Margin="25,0"
                                     FontSize="14"
                                     FontFamily="Roboto"
                                     FontWeight="Medium"
@@ -174,6 +176,7 @@
                                 <Image Source="/Resources/double-arrow.png" Grid.Column="1" Margin="10"/>
 
                                 <TextBlock Foreground="#303030" Grid.Column="2"
+                                    Margin="25,0"
                                     FontSize="14"
                                     FontFamily="Roboto"
                                     FontWeight="Medium"
@@ -194,6 +197,7 @@
                                 </TextBlock>
 
                                 <TextBlock Foreground="#303030" Grid.Column="3"
+                                    Margin="25,0"
                                     FontSize="14"
                                     FontFamily="Roboto"
                                     FontWeight="Medium"
@@ -213,6 +217,7 @@
                                 </TextBlock>
 
                                 <TextBlock Foreground="Green" Grid.Column="4"
+                                    Margin="25,0"
                                     FontSize="16"
                                     FontFamily="Roboto"
                                     FontWeight="Bold"
@@ -259,6 +264,38 @@
                                             </TextBlock.Effect>
                                             
                                             <Run Text="Изменить"/>
+                                        </TextBlock>
+                                    </Button>
+                                </Border>
+
+                                <Border Grid.Column="6" BorderThickness="1" BorderBrush="#ACACAC" Margin="10">
+
+                                    <Border.BitmapEffect>
+                                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                                    </Border.BitmapEffect>
+
+                                    <Button Command="{Binding DataContext.DeleteRequestCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding .}"
+                                        BorderThickness="0">
+
+                                        <Button.Background>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#921A00" Offset="0.0"/>
+                                                <GradientStop Color="Black" Offset="5"/>
+                                            </RadialGradientBrush>
+                                        </Button.Background>
+
+                                        <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect
+                                                    ShadowDepth="1"
+                                                    Direction="250"
+                                                    Color="Black"
+                                                    Opacity="0.5"
+                                                    BlurRadius="1"/>
+                                            </TextBlock.Effect>
+                                            
+                                            <Run Text="Удалить"/>
                                         </TextBlock>
                                     </Button>
                                 </Border>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Prism.Mvvm;
+using System.Diagnostics.CodeAnalysis;
 
 namespace major_delivery_manager.Models
 {
@@ -17,6 +18,8 @@ namespace major_delivery_manager.Models
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
+        public string ResponsibleId { get; set; }
 
         [NotMapped] public string status;
 
@@ -28,6 +31,7 @@ namespace major_delivery_manager.Models
         [NotMapped] private string volume;
         [NotMapped] private string selfcost;
         [NotMapped] private string amount;
+        [NotMapped] private string cancelComment;
 
         public string Status
         {
@@ -38,13 +42,23 @@ namespace major_delivery_manager.Models
             }
         }
 
+        public string CancelComment
+        {
+            get => cancelComment;
+            set
+            {
+                SetProperty(ref cancelComment, value);
+            }
+        }
+
         [Required]
         public string ToCountry
         {
             get => toCountry;
             set
             {
-                SetProperty(ref toCountry, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref toCountry, value);
             }
         }
 
@@ -54,7 +68,8 @@ namespace major_delivery_manager.Models
             get => toSettlement;
             set
             {
-                SetProperty(ref toSettlement, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref toSettlement, value);
             }
         }
 
@@ -64,7 +79,8 @@ namespace major_delivery_manager.Models
             get => fromCountry;
             set
             {
-                SetProperty(ref fromCountry, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref fromCountry, value);
             }
         }
 
@@ -74,7 +90,8 @@ namespace major_delivery_manager.Models
             get => fromSettlement;
             set
             {
-                SetProperty(ref fromSettlement, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref fromSettlement, value);
             }
         }
 
@@ -84,7 +101,8 @@ namespace major_delivery_manager.Models
             get => weight;
             set
             {
-                SetProperty(ref weight, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref weight, value);
             }
         }
 
@@ -94,7 +112,8 @@ namespace major_delivery_manager.Models
             get => volume;
             set
             {
-                SetProperty(ref volume, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref volume, value);
             }
         }
 
@@ -104,7 +123,8 @@ namespace major_delivery_manager.Models
             get => selfcost;
             set
             {
-                SetProperty(ref selfcost, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref selfcost, value);
             }
         }
 
@@ -114,15 +134,17 @@ namespace major_delivery_manager.Models
             get => amount;
             set
             {
-                SetProperty(ref amount, value);
+                if (this.GetState() == RequestState.NEW)
+                    SetProperty(ref amount, value);
             }
         }
-
-        //[NotMapped] public CourierModel Responsible { get; set; }
 
         public RequestModel()
         {
             Id = Guid.NewGuid().ToString();
+            ResponsibleId = "NONE";
+            CancelComment = "NOTCANCELLED";
+
             _state = new RequestStateNew();
 
             Handle();
@@ -131,6 +153,7 @@ namespace major_delivery_manager.Models
         public void ChangeState(IState<RequestState> newState)
         {
             _state = newState;
+            Handle();
         }
 
         public void Handle()
@@ -145,7 +168,26 @@ namespace major_delivery_manager.Models
 
         public void AssignCourier(CourierModel courier)
         {
-            //Responsible = courier;
+            ResponsibleId = courier.Id;
+        }
+
+        public void EnsureState() 
+        {
+            switch (Status)
+            {
+                case "ВЫПОЛНЯЕТСЯ":
+                    _state = new RequestStateInProccess();
+                    break;
+                case "ВЫПОЛНЕНА":
+                    _state = new RequestStateDone();
+                    break;
+                case "ОТМЕНЕНА":
+                    _state = new RequestStateCanceled();
+                    break;
+                default:
+                    _state = new RequestStateNew();
+                    break;
+            }
         }
     }
 }

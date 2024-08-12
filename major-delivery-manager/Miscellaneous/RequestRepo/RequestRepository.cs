@@ -25,7 +25,14 @@ namespace major_delivery_manager
         {
             _DbContext.Database.EnsureCreated();
             _DbContext.Requests.Load();
-            return _DbContext.Requests.Local.ToObservableCollection();
+            var collection = _DbContext.Requests.Local.ToObservableCollection();
+
+            foreach ( var item in collection )
+            {
+                item.EnsureState();
+            }
+
+            return collection;
         }
 
         public RequestModel? GetById(string id)
@@ -34,7 +41,10 @@ namespace major_delivery_manager
 
             if (_DbContext.Requests.Find(id) != null)
             {
-                return _DbContext.Requests.Find(id);
+                var item = _DbContext.Requests.Find(id);
+                item.EnsureState();
+
+                return item;
             }
             
             return null;

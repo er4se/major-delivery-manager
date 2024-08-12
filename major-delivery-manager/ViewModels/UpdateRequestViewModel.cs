@@ -12,6 +12,8 @@ using Prism.Commands;
 using System.Reflection;
 using System.Collections.ObjectModel;
 
+//THE WORST VM ON EARTH, NO TIME FOR REFACTORING
+
 namespace major_delivery_manager.ViewModels
 {
     internal class UpdateRequestViewModel : BindableBase
@@ -57,6 +59,24 @@ namespace major_delivery_manager.ViewModels
             }
         }
 
+        private DelegateCommand updateRequestCommand;
+        public DelegateCommand UpdateRequestCommand
+        {
+            get
+            {
+                return updateRequestCommand ?? (new DelegateCommand(OnUpdateRequest));
+            }
+        }
+
+        private DelegateCommand cancelRequestCommand;
+        public DelegateCommand CancelRequestCommand
+        {
+            get
+            {
+                return cancelRequestCommand ?? (new DelegateCommand(OnLoadCancelRequest));
+            }
+        }
+
         private DelegateCommand loadAddCourier;
         public DelegateCommand LoadAddCourier
         {
@@ -71,12 +91,12 @@ namespace major_delivery_manager.ViewModels
             }
         }
 
-        private DelegateCommand updateRequestCommand;
-        public DelegateCommand UpdateRequestCommand
+        private DelegateCommand changeRequestCommand;
+        public DelegateCommand ChangeRequestCommand
         {
             get
             {
-                return updateRequestCommand ?? (new DelegateCommand(OnUpdateRequest, CanUpdateRequest));
+                return changeRequestCommand ?? (new DelegateCommand(OnChangeRequest, CanChangeRequest));
             }
         }
 
@@ -89,31 +109,74 @@ namespace major_delivery_manager.ViewModels
             }
         }
 
+        private DelegateCommand assignCourierCommand;
+        public DelegateCommand AssignCourierCommand
+        {
+            get
+            {
+                return assignCourierCommand ?? (new DelegateCommand(OnAssignCourier));
+            }
+        }
+
+        private DelegateCommand refreshCouriersCommand;
+        public DelegateCommand RefreshCouriersCommand
+        {
+            get
+            {
+                return refreshCouriersCommand ?? (new DelegateCommand(OnRefreshCouriers));
+            }
+        }
+
         public UpdateRequestViewModel(RequestModel request)
         {
             this.request = request;
             requestRepo = new RequestRepository();
             courierRepo = new CourierRepository();
 
-            Couriers = new ObservableCollection<CourierModel>(courierRepo.GetAll());
+            if (request.GetState() == RequestState.NEW)
+            {
+                Couriers = new ObservableCollection<CourierModel>(courierRepo.GetAll());
+            }
+            else
+            {
+                try
+                {
+                    Couriers = new ObservableCollection<CourierModel>();
+                    Couriers.Add(courierRepo.GetById(request.ResponsibleId));
+                    Courier = Couriers.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
-        private bool CanUpdateRequest() => true;
+        private bool CanChangeRequest() => true;
 
-        private async void OnUpdateRequest()
+        private async void OnChangeRequest()
         {
             bool flag = true;
+
+            if (Request.GetState() != RequestState.NEW) flag = false;
+
+            MessageBox.Show(Request.GetState().ToString()); //
+
             foreach (PropertyInfo prop in Request.GetType().GetProperties())
             {
                 var value = prop.GetValue(Request);
 
                 if (prop.PropertyType.Name == nameof(String))
-                    if (string.IsNullOrEmpty((string)value)) flag = false;
+                    if (string.IsNullOrEmpty((string)value))
+                    {
+                        flag = false;
+                        break;
+                    }
             }
 
             if (!flag)
             {
-                MessageBox.Show("Не все поля заполнены!");
+                MessageBox.Show("Неверный статус заявки или данные!");
             }
             else
             {
@@ -142,6 +205,71 @@ namespace major_delivery_manager.ViewModels
             AddCourierView instance = new AddCourierView();
             instance.DataContext = new AddCourierViewModel();
             instance.Show();
+        }
+
+        private void OnLoadCancelRequest()
+        {
+            if (Courier != null)
+            {
+                CancelRequestView instance = new CancelRequestView();
+                instance.DataContext = new CancelRequestViewModel(Request);
+                instance.Show();
+
+                Courier.CancelCommand(Request);
+                requestRepo.Update(Request);
+            }
+        }
+
+        private void OnAssignCourier()
+        {
+            if (Request.GetState() == RequestState.NEW)
+            {
+                Request.AssignCourier(Courier);
+                Courier.ExecuteCommand(Request);
+                requestRepo.Update(Request);
+
+                MessageBox.Show("Успех!");
+            }
+            else
+            {
+                MessageBox.Show("Изменение данных о курьере возможно только при статусе 'НОВАЯ'");
+            }
+        }
+
+        private void OnUpdateRequest()
+        {
+            if (Courier != null)
+            {
+                if (Request.GetState() == RequestState.NEW)
+                {
+                    Request.AssignCourier(Courier);
+                    requestRepo.Update(Request);
+                }
+
+                Courier.ExecuteCommand(Request);
+                requestRepo.Update(Request);
+            }
+        }
+
+        private void OnRefreshCouriers()
+        {
+            if (request.GetState() == RequestState.NEW)
+            {
+                Couriers = new ObservableCollection<CourierModel>(courierRepo.GetAll());
+            }
+            else
+            {
+                try
+                {
+                    Couriers = new ObservableCollection<CourierModel>();
+                    Couriers.Add(courierRepo.GetById(request.ResponsibleId));
+                    Courier = Couriers.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         public void Clear()

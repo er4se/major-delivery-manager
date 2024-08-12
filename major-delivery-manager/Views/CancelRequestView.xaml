@@ -1,4 +1,4 @@
-﻿<Window x:Class="major_delivery_manager.Views.AddCourierView"
+﻿<Window x:Class="major_delivery_manager.Views.CancelRequestView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,45 +30,45 @@
             </Border>
 
             <TextBlock Foreground="White"
-                       FontSize="24"
-                       FontFamily="Roboto"
-                       FontWeight="Medium"
-                       VerticalAlignment="Center"
-                       Margin="25,0,0,0">
+               FontSize="24"
+               FontFamily="Roboto"
+               FontWeight="Medium"
+               VerticalAlignment="Center"
+               Margin="25,0,0,0">
                 <TextBlock.Effect>
                     <DropShadowEffect
-                        ShadowDepth="1"
-                        Direction="250"
-                        Color="Black"
-                        Opacity="0.5"
-                        BlurRadius="1"/>
+                ShadowDepth="1"
+                Direction="250"
+                Color="Black"
+                Opacity="0.5"
+                BlurRadius="1"/>
                 </TextBlock.Effect>
-                <Run Text="Добавить курьера"/>
+        <Run Text="Отмена заявки"/>
             </TextBlock>
 
         </Grid>
-            <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1">
             <TextBlock Foreground="#303030"
-                FontSize="12"
-                FontFamily="Roboto"
-                FontWeight="Medium"
-                VerticalAlignment="Center"
-                Margin="25,15,25,0">
+        FontSize="12"
+        FontFamily="Roboto"
+        FontWeight="Medium"
+        VerticalAlignment="Center"
+        Margin="25,15,25,0">
 
                 <TextBlock.Effect>
                     <DropShadowEffect
-                        ShadowDepth="1"
-                        Direction="250"
-                        Color="Black"
-                        Opacity="0.5"
-                        BlurRadius="1"/>
+                ShadowDepth="1"
+                Direction="250"
+                Color="Black"
+                Opacity="0.5"
+                BlurRadius="1"/>
                 </TextBlock.Effect>
-                                
-                <Run Text="ФИО:"/>
+                        
+        <Run Text="Причина отмены:"/>
             </TextBlock>
-            
-            <TextBox Text="{Binding Courier.FullName}"
-                Grid.Row="2" Grid.Column="0" Margin="25,15,25,0" Foreground="White" Padding="3" CaretBrush="White">
+
+            <TextBox Text="{Binding Request.CancelComment, Mode=OneWayToSource}"
+        Grid.Row="2" Grid.Column="0" Margin="25,15,25,0" Foreground="White" Padding="3" CaretBrush="White">
                 <TextBox.Background>
                     <RadialGradientBrush>
                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -81,8 +81,8 @@
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                 </Border.BitmapEffect>
-                <Button Command="{Binding AddCourierCommand}" 
-                        BorderThickness="0">
+                <Button Command="{Binding CancelRequestCommand}" 
+                BorderThickness="0">
                     <Button.Background>
                         <RadialGradientBrush>
                             <GradientStop Color="#ED9206" Offset="0.0"/>
@@ -92,13 +92,13 @@
                     <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
                         <TextBlock.Effect>
                             <DropShadowEffect
-                                ShadowDepth="1"
-                                Direction="250"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="1"/>
+                        ShadowDepth="1"
+                        Direction="250"
+                        Color="Black"
+                        Opacity="0.5"
+                        BlurRadius="1"/>
                         </TextBlock.Effect>
-                        <Run Text="Добавить"/>
+                <Run Text="Добавить"/>
                     </TextBlock>
                 </Button>
             </Border>

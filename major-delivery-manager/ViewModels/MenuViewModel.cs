@@ -11,13 +11,7 @@ namespace major_delivery_manager.ViewModels
 {
     class MenuViewModel : BindableBase
     {
-        public MenuViewModel()
-        {
-            //loadMainVMCommand = new DelegateCommand(OnLoadMainVM, CanLoadMainVM);
-            //loadCreateVMCommand = new DelegateCommand(OnLoadCreateVM, CanLoadCreateVM);
-            //loadUpdateVMCommand = new DelegateCommand(OnLoadUpdateVM, CanLoadUpdateVM);
-            //loadRegistryVMCommand = new DelegateCommand(OnLoadRegistryVM, CanLoadRegistryVM);
-        }
+        public MenuViewModel() { }
 
         public IMainWindowsCodeBehind CodeBehind { get; set; }
 

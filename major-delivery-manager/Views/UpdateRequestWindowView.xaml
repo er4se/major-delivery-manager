@@ -6,9 +6,9 @@
         xmlns:vm="clr-namespace:major_delivery_manager.ViewModels"
         xmlns:local="clr-namespace:major_delivery_manager.Views"
         mc:Ignorable="d"
-        Title="UpdateRequestWindowView" Height="680" Width="674">
+        Title="Major" Height="680" Width="674">
 
-    <Grid Background="#ECECEC">
+    <Grid Background="#ECECEC" Margin="1,0,-1,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="200"/>
@@ -107,14 +107,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0"
+                    <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                         FontSize="14"
                         FontFamily="Roboto"
                         FontWeight="Medium"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
+                        HorizontalAlignment="Left"
                         Margin="25,0">
 
                         <TextBlock.Effect>
@@ -128,7 +130,7 @@
                         <Run Text="Статус заявки:"/>
                     </TextBlock>
 
-                    <TextBlock Foreground="Green" Grid.Column="1" Grid.Row="0"
+                    <TextBlock Foreground="Green" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2"
                         FontSize="14"
                         FontFamily="Roboto"
                         FontWeight="BOLD"
@@ -147,11 +149,12 @@
                         <Run Text="{Binding Request.Status}"/>
                     </TextBlock>
 
-                    <Border Grid.Column="2" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
+                    <Border Grid.Column="4" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="15, 15, 15, 15">
                         <Border.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                         </Border.BitmapEffect>
-                        <Button BorderThickness="0">
+                        <Button Command="{Binding CancelRequestCommand}"
+                            BorderThickness="0">
                             <Button.Background>
                                 <RadialGradientBrush>
                                     <GradientStop Color="#921A00" Offset="0.0"/>
@@ -173,11 +176,12 @@
                         </Button>
                     </Border>
 
-                    <Border Grid.Column="3" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
+                    <Border Grid.Column="5" Grid.Row="0" BorderThickness="1" BorderBrush="#ACACAC" Margin="15, 15, 15, 15">
                         <Border.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                         </Border.BitmapEffect>
-                        <Button BorderThickness="0">
+                        <Button Command="{Binding UpdateRequestCommand}"
+                            BorderThickness="0">
                             <Button.Background>
                                 <RadialGradientBrush>
                                     <GradientStop Color="#ED9206" Offset="0.0"/>
@@ -200,9 +204,9 @@
                         </Button>
                     </Border>
 
-                    <Rectangle Width="1" Height="auto" Grid.Column="0" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
                     <Rectangle Width="1" Height="auto" Grid.Column="1" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
-                    <Rectangle Width="1" Height="auto" Grid.Column="2" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
+                    <Rectangle Width="1" Height="auto" Grid.Column="3" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
+                    <Rectangle Width="1" Height="auto" Grid.Column="4" HorizontalAlignment="Right" Fill="#484848" Margin="0,18"/>
 
                     <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                         FontSize="14"
@@ -222,15 +226,16 @@
                         <Run Text="Назначить курьера:"/>
                     </TextBlock>
 
-                    <Rectangle Height="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 0"/>
+                    <Rectangle Height="1" Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 0"/>
 
                     <ComboBox ItemsSource="{Binding Couriers}" DisplayMemberPath="FullName"
-                        SelectedItem="{Binding Path=Courier, Mode=OneWayToSource}"
-                        Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="25,0,25,10">
+                        SelectedItem="{Binding Path=Courier}"
+                        
+                        Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="25,0,25,10">
                         
                     </ComboBox>
 
-                    <Border Grid.Column="2" Grid.Row="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 0, 25, 10">
+                    <Border Grid.Column="4" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 10, 25, 10">
                         <Border.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                         </Border.BitmapEffect>
@@ -242,45 +247,44 @@
                                     <GradientStop Color="White" Offset="5"/>
                                 </RadialGradientBrush>
                             </Button.Background>
-                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="1"
-                                    Direction="250"
-                                    Color="Black"
-                                    Opacity="0.5"
-                                    BlurRadius="1"/>
-                                </TextBlock.Effect>
-                                
-                                <Run Text="Добавить"/>
-                            </TextBlock>
+
+                            <Image Source="/Resources/add-icon.png"/>
 
                         </Button>
                     </Border>
 
-                    <Border Grid.Column="3" Grid.Row="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 0, 25, 10">
+                    <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 10, 25, 10">
                         <Border.BitmapEffect>
                             <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                         </Border.BitmapEffect>
-                        <Button BorderThickness="0">
+                        <Button Command="{Binding RefreshCouriersCommand}"
+                            BorderThickness="0">
                             <Button.Background>
                                 <RadialGradientBrush>
                                     <GradientStop Color="#ED9206" Offset="0.0"/>
                                     <GradientStop Color="White" Offset="5"/>
                                 </RadialGradientBrush>
                             </Button.Background>
-                            <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="1"
-                                    Direction="250"
-                                    Color="Black"
-                                    Opacity="0.5"
-                                    BlurRadius="1"/>
-                                </TextBlock.Effect>
-                                
-                                <Run Text="Назначить"/>
-                            </TextBlock>
+
+                            <Image Source="/Resources/refresh-icon.png"/>
+
+                        </Button>
+                    </Border>
+
+                    <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 10, 25, 10">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                        </Border.BitmapEffect>
+                        <Button Command="{Binding AssignCourierCommand}"
+                            BorderThickness="0">
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#ED9206" Offset="0.0"/>
+                                    <GradientStop Color="White" Offset="5"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+
+                            <Image Source="/Resources/attach-icon.png"/>
 
                         </Button>
                     </Border>
@@ -684,7 +688,7 @@
                     <Border.BitmapEffect>
                         <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                     </Border.BitmapEffect>
-                    <Button Command="{Binding UpdateRequestCommand}" 
+                    <Button Command="{Binding ChangeRequestCommand}" 
                         BorderThickness="0">
                         <Button.Background>
                             <RadialGradientBrush>
