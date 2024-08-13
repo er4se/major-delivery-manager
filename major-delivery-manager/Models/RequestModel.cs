@@ -9,12 +9,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Prism.Mvvm;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 namespace major_delivery_manager.Models
 {
     internal class RequestModel : BindableBase
     {
         private IState<RequestState> _state;
+        private static readonly Regex onlyNumbers = new Regex("[^0-9.-]+");
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
@@ -101,7 +103,7 @@ namespace major_delivery_manager.Models
             get => weight;
             set
             {
-                if (this.GetState() == RequestState.NEW)
+                if ((this.GetState() == RequestState.NEW) && !onlyNumbers.IsMatch(value))
                     SetProperty(ref weight, value);
             }
         }
@@ -112,7 +114,7 @@ namespace major_delivery_manager.Models
             get => volume;
             set
             {
-                if (this.GetState() == RequestState.NEW)
+                if ((this.GetState() == RequestState.NEW) && !onlyNumbers.IsMatch(value))
                     SetProperty(ref volume, value);
             }
         }
@@ -123,7 +125,7 @@ namespace major_delivery_manager.Models
             get => selfcost;
             set
             {
-                if (this.GetState() == RequestState.NEW)
+                if ((this.GetState() == RequestState.NEW) && !onlyNumbers.IsMatch(value))
                     SetProperty(ref selfcost, value);
             }
         }
@@ -134,7 +136,7 @@ namespace major_delivery_manager.Models
             get => amount;
             set
             {
-                if (this.GetState() == RequestState.NEW)
+                if ((this.GetState() == RequestState.NEW) && !onlyNumbers.IsMatch(value))
                     SetProperty(ref amount, value);
             }
         }

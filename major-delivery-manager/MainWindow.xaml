@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:major_delivery_manager"
         mc:Ignorable="d"
-        Title="Major" Height="480" Width="854" ResizeMode="NoResize">
+        Icon="/Resources/major-outside-logo.png"
+        Title="Major" Height="480" Width="854" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>

@@ -6,7 +6,8 @@
         xmlns:vm="clr-namespace:major_delivery_manager.ViewModels"
         xmlns:local="clr-namespace:major_delivery_manager.Views"
         mc:Ignorable="d"
-        Title="Major" Height="680" Width="674">
+        Icon="/Resources/major-outside-logo.png"
+        Title="Major" Height="680" Width="674" WindowStartupLocation="CenterScreen">
 
     <Grid Background="#ECECEC" Margin="1,0,-1,0">
         <Grid.RowDefinitions>
