@@ -68,7 +68,7 @@
         <Run Text="Причина отмены:"/>
             </TextBlock>
 
-            <TextBox Text="{Binding Request.CancelComment, Mode=OneWayToSource}"
+            <TextBox Text="{Binding Cancel.Comment, Mode=OneWayToSource}"
         Grid.Row="2" Grid.Column="0" Margin="25,15,25,0" Foreground="White" Padding="3" CaretBrush="White">
                 <TextBox.Background>
                     <RadialGradientBrush>

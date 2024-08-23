@@ -14,7 +14,8 @@ namespace major_delivery_manager.ViewModels
 {
     internal class CancelRequestViewModel : BindableBase
     {
-        private IRepository<RequestModel> repository;
+        private IRepository<RequestCancellationModel> cancelRepo;
+        private IRepository<RequestModel> requestRepo;
 
         private RequestModel request;
         public RequestModel Request
@@ -24,6 +25,17 @@ namespace major_delivery_manager.ViewModels
             {
                 request = value;
                 RaisePropertyChanged(nameof(Request));
+            }
+        }
+
+        private RequestCancellationModel cancel;
+        public RequestCancellationModel Cancel
+        {
+            get => cancel;
+            set
+            {
+                cancel = value;
+                RaisePropertyChanged(nameof(Cancel));
             }
         }
 
@@ -38,18 +50,26 @@ namespace major_delivery_manager.ViewModels
 
         public CancelRequestViewModel(RequestModel request)
         {
-            repository = new RequestRepository();
+            cancelRepo = new CancelRepository();
+            requestRepo = new RequestRepository();
 
             if(request != null)
+            {
                 Request = request;
+                Cancel = new RequestCancellationModel(request);
+            }
             else throw new ArgumentNullException(nameof(request));
         }
 
         private async void OnCancelRequest()
         {
-            if ((!string.IsNullOrEmpty(Request.CancelComment)) || Request.CancelComment != "NOTCANCELLED")
+            if ((!string.IsNullOrEmpty(Cancel.Comment)))
             {
-                await repository.Update(Request);
+                Request.ChangeState(new RequestStateCanceled());
+
+                await cancelRepo.Create(Cancel);
+                await requestRepo.Update(Request);
+
                 MessageBox.Show("Заявка отменена!");
             }
             else

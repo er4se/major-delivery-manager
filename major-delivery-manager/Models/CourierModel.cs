@@ -32,6 +32,8 @@ namespace major_delivery_manager.Models
         [NotMapped] private readonly IRequestCommand cancelCommand;
         [NotMapped] private readonly IRequestCommand deliverCommand;
 
+        public virtual ICollection<RequestModel> RequestModels { get; set; }
+
         public CourierModel()
         {
             Id = Guid.NewGuid().ToString();

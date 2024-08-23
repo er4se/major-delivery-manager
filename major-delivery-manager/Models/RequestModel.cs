@@ -21,7 +21,8 @@ namespace major_delivery_manager.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
-        public string ResponsibleId { get; set; }
+        [ForeignKey("CourierModel")]
+        public string? ResponsibleId { get; set; }
 
         [NotMapped] public string status;
 
@@ -33,7 +34,9 @@ namespace major_delivery_manager.Models
         [NotMapped] private string volume;
         [NotMapped] private string selfcost;
         [NotMapped] private string amount;
-        [NotMapped] private string cancelComment;
+
+        public virtual RequestCancellationModel CancellationModel { get; set; }
+        public virtual CourierModel CourierModel { get; set; }
 
         public string Status
         {
@@ -41,15 +44,6 @@ namespace major_delivery_manager.Models
             set
             {
                 SetProperty(ref status, value);
-            }
-        }
-
-        public string CancelComment
-        {
-            get => cancelComment;
-            set
-            {
-                SetProperty(ref cancelComment, value);
             }
         }
 
@@ -144,8 +138,7 @@ namespace major_delivery_manager.Models
         public RequestModel()
         {
             Id = Guid.NewGuid().ToString();
-            ResponsibleId = "NONE";
-            CancelComment = "NOTCANCELLED";
+            ResponsibleId = null;
 
             _state = new RequestStateNew();
 

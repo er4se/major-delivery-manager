@@ -68,6 +68,8 @@ namespace major_delivery_manager.ViewModels
             bool flag = true;
             foreach(PropertyInfo prop in Request.GetType().GetProperties())
             {
+                if (prop.Name == "ResponsibleId") continue;
+
                 var value = prop.GetValue(Request);
 
                 if (prop.PropertyType.Name == nameof(String))

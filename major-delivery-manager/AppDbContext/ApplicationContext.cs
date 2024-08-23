@@ -14,6 +14,7 @@ namespace major_delivery_manager.AppDbContext
     {
         public DbSet<RequestModel> Requests { get; set; } = null!;
         public DbSet<CourierModel> Couriers { get; set; } = null!;
+        public DbSet<RequestCancellationModel> Cancellations { get; set; } = null!;
 
         public ApplicationContext()
         {

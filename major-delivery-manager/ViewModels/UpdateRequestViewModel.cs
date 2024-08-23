@@ -11,6 +11,7 @@ using major_delivery_manager.Interfaces;
 using Prism.Commands;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using major_delivery_manager.AppDbContext;
 
 //THE WORST VM ON EARTH, NO TIME FOR REFACTORING
 
@@ -160,8 +161,6 @@ namespace major_delivery_manager.ViewModels
 
             if (Request.GetState() != RequestState.NEW) flag = false;
 
-            MessageBox.Show(Request.GetState().ToString()); //
-
             foreach (PropertyInfo prop in Request.GetType().GetProperties())
             {
                 var value = prop.GetValue(Request);
@@ -209,15 +208,9 @@ namespace major_delivery_manager.ViewModels
 
         private void OnLoadCancelRequest()
         {
-            if (Courier != null)
-            {
-                CancelRequestView instance = new CancelRequestView();
-                instance.DataContext = new CancelRequestViewModel(Request);
-                instance.Show();
-
-                Courier.CancelCommand(Request);
-                requestRepo.Update(Request);
-            }
+            CancelRequestView instance = new CancelRequestView();
+            instance.DataContext = new CancelRequestViewModel(Request);
+            instance.Show();
         }
 
         private void OnAssignCourier()
