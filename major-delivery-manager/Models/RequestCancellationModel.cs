@@ -11,15 +11,14 @@ namespace major_delivery_manager.Models
 {
     internal class RequestCancellationModel : BindableBase
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public string Id { get; set; }
 
-        [ForeignKey("RequestModel")]
-        public string RequestId { get; set; }
+        public string RequestModelId { get; set; }
 
         [NotMapped]
         private string? comment;
-        public virtual RequestModel Request { get; set; }
+        public RequestModel? Request { get; set; }
 
         public string? Comment
         {
@@ -28,12 +27,6 @@ namespace major_delivery_manager.Models
             {
                 SetProperty(ref comment, value);
             }
-        }
-
-        public RequestCancellationModel(RequestModel request)
-        {
-            Id = Guid.NewGuid().ToString();
-            this.RequestId = request.Id;
         }
 
         public RequestCancellationModel()

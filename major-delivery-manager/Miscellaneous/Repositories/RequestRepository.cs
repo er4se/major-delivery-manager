@@ -24,14 +24,16 @@ namespace major_delivery_manager
         public IEnumerable<RequestModel> GetAll()
         {
             _DbContext.Requests.Load();
-            var collection = _DbContext.Requests.Local.ToObservableCollection();
+            var collection = _DbContext.Requests
+                .Include(r => r.CancellationModel)
+                .ToList();
 
             foreach ( var item in collection )
             {
                 item.EnsureState();
             }
 
-            return collection;
+            return new ObservableCollection<RequestModel>(collection);
         }
 
         public RequestModel? GetById(string id)

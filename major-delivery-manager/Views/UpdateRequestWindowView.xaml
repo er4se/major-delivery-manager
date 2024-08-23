@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:major_delivery_manager.ViewModels"
         xmlns:local="clr-namespace:major_delivery_manager.Views"
+        xmlns:misc="clr-namespace:major_delivery_manager.Miscellaneous"
         mc:Ignorable="d"
         Icon="/Resources/major-outside-logo.png"
         Title="Major" Height="680" Width="674" WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <misc:ButtonTextConverter x:Key="ButtonTextConverter"/>
+    </Window.Resources>
+    
     <Grid Background="#ECECEC" Margin="1,0,-1,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -199,7 +204,7 @@
                                     BlurRadius="1"/>
                                 </TextBlock.Effect>
                                 
-                                <Run Text="Обновить"/>
+                                <Run Text="{Binding Request.State, Converter={StaticResource ButtonTextConverter}}"/>
                             </TextBlock>
                             
                         </Button>

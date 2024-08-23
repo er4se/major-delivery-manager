@@ -35,8 +35,17 @@ namespace major_delivery_manager.Models
         [NotMapped] private string selfcost;
         [NotMapped] private string amount;
 
-        public virtual RequestCancellationModel CancellationModel { get; set; }
+        public RequestCancellationModel CancellationModel { get; set; }
         public virtual CourierModel CourierModel { get; set; }
+
+        //------------------------------------------//
+        [NotMapped]
+        public RequestState State
+        {
+            get => GetState();
+            set { }
+        }
+        //------------------------------------------//
 
         public string Status
         {

@@ -239,7 +239,12 @@
                                     BlurRadius="1"/>
                                     </TextBlock.Effect>
                                 
-                                <Run Text="{Binding Status}"/>
+                                    <Run Text="{Binding Status}"/>
+
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Content="{Binding CancellationModel.Comment}"/>
+                                    </TextBlock.ToolTip>
+                                    
                                 </TextBlock>
 
                                 <Border Grid.Column="5" BorderThickness="1" BorderBrush="#ACACAC" Margin="10">

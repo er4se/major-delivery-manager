@@ -56,25 +56,34 @@ namespace major_delivery_manager.ViewModels
             if(request != null)
             {
                 Request = request;
-                Cancel = new RequestCancellationModel(request);
+                Cancel = new RequestCancellationModel();
+                Cancel.RequestModelId = request.Id;
             }
             else throw new ArgumentNullException(nameof(request));
         }
 
         private async void OnCancelRequest()
         {
-            if ((!string.IsNullOrEmpty(Cancel.Comment)))
+            if (Request.GetState() != RequestState.CANCELED)
             {
-                Request.ChangeState(new RequestStateCanceled());
+                if ((!string.IsNullOrEmpty(Cancel.Comment)))
+                {
+                    Request.ChangeState(new RequestStateCanceled());
+                    Request.CancellationModel = Cancel;
 
-                await cancelRepo.Create(Cancel);
-                await requestRepo.Update(Request);
+                    await cancelRepo.Create(Cancel);
+                    await requestRepo.Update(Request);
 
-                MessageBox.Show("Заявка отменена!");
+                    MessageBox.Show("Заявка отменена!");
+                }
+                else
+                {
+                    MessageBox.Show("Введите комментарий!");
+                }
             }
             else
             {
-                MessageBox.Show("Введите комментарий!");
+                MessageBox.Show("Заявка уже отменена");
             }
         }
     }

@@ -26,5 +26,15 @@ namespace major_delivery_manager.AppDbContext
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             optionsBuilder.UseSqlite(connectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequestModel>()
+                .HasOne(m => m.CancellationModel)
+                .WithOne(r => r.Request)
+                .HasForeignKey<RequestCancellationModel>(r => r.RequestModelId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

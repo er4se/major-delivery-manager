@@ -23,6 +23,7 @@ namespace major_delivery_manager.ViewModels
         public IMainWindowsCodeBehind CodeBehind { get; set; }
 
         private IRepository<RequestModel> repository;
+        private IRepository<RequestCancellationModel> cancelRepo;
 
         private string searchTerm;
         public string SearchTerm
@@ -107,6 +108,7 @@ namespace major_delivery_manager.ViewModels
             mainCodeBehind = codeBehind;
 
             repository = new RequestRepository();
+            cancelRepo = new CancelRepository();
             Registry = new ObservableCollection<RequestModel>(repository.GetAll());
         }
 

@@ -31,14 +31,22 @@ namespace major_delivery_manager
 
         public RequestCancellationModel? GetById(string id)
         {
-            if (_DbContext.Cancellations.Find(id) != null)
-            {
-                var item = _DbContext.Cancellations.Find(id);
+            var entities = _DbContext.Cancellations.Where(entity => entity.RequestModelId == id);
+            return entities.FirstOrDefault();
+            //if (_DbContext.Cancellations.Find(id) != null)
+            //{
+            //    var item = _DbContext.Cancellations.Find(id);
+            //
+            //    return item;
+            //}
+            //
+            //return null;
+        }
 
-                return item;
-            }
-
-            return null;
+        public RequestCancellationModel? GetBySubId(string subId)
+        {
+            var entities = _DbContext.Cancellations.Where(entity => entity.RequestModelId == subId);
+            return entities.FirstOrDefault();
         }
 
         public async Task Create(RequestCancellationModel entity)
