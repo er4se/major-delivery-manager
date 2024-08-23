@@ -222,17 +222,20 @@ namespace major_delivery_manager.ViewModels
 
         private void OnAssignCourier()
         {
-            if (Request.GetState() == RequestState.NEW)
+            if (Courier != null)
             {
-                Request.AssignCourier(Courier);
-                Courier.ExecuteCommand(Request);
-                requestRepo.Update(Request);
+                if (Request.GetState() == RequestState.NEW)
+                {
+                    Request.AssignCourier(Courier);
+                    Courier.ExecuteCommand(Request);
+                    requestRepo.Update(Request);
 
-                MessageBox.Show("Успех!");
-            }
-            else
-            {
-                MessageBox.Show("Изменение данных о курьере возможно только при статусе 'НОВАЯ'");
+                    MessageBox.Show("Успех!");
+                }
+                else
+                {
+                    MessageBox.Show("Изменение данных о курьере возможно только при статусе 'НОВАЯ'");
+                }
             }
         }
 

@@ -689,7 +689,7 @@
                     <Border.BitmapEffect>
                         <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                     </Border.BitmapEffect>
-                    <Button Command="{Binding ChangeRequestCommand}" 
+                    <Button Command="{Binding ChangeRequestCommand}" Click="OnClosing_Click"
                         BorderThickness="0">
                         <Button.Background>
                             <RadialGradientBrush>

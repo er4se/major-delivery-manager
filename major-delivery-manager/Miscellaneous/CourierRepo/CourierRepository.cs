@@ -23,15 +23,12 @@ namespace major_delivery_manager
 
         public IEnumerable<CourierModel> GetAll()
         {
-            _DbContext.Database.EnsureCreated();
             _DbContext.Couriers.Load();
             return _DbContext.Couriers.Local.ToObservableCollection();
         }
 
         public CourierModel? GetById(string id)
         {
-            _DbContext.Database.EnsureCreated();
-
             if (_DbContext.Couriers.Find(id) != null)
             {
                 return _DbContext.Couriers.Find(id);
@@ -42,7 +39,6 @@ namespace major_delivery_manager
 
         public async Task Create(CourierModel entity)
         {
-            await _DbContext.Database.EnsureCreatedAsync();
             await _DbContext.Couriers.LoadAsync();
 
             if (entity != null)
@@ -55,7 +51,6 @@ namespace major_delivery_manager
 
         public async Task Update(CourierModel entity)
         {
-            await _DbContext.Database.EnsureCreatedAsync();
             await _DbContext.Couriers.LoadAsync();
 
             var realEntity = GetById(entity.Id);
@@ -70,7 +65,6 @@ namespace major_delivery_manager
 
         public void Delete(CourierModel entity)
         {
-            _DbContext.Database.EnsureCreated();
             _DbContext.Couriers.Remove(entity);
 
             Save();

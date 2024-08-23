@@ -23,5 +23,10 @@ namespace major_delivery_manager.Views
         {
             InitializeComponent();
         }
+
+        private void OnClosing_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

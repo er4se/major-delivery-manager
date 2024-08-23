@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using major_delivery_manager.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace major_delivery_manager.AppDbContext
 {
@@ -12,9 +14,16 @@ namespace major_delivery_manager.AppDbContext
     {
         public DbSet<RequestModel> Requests { get; set; } = null!;
         public DbSet<CourierModel> Couriers { get; set; } = null!;
+
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=major-delivery-database-test.db");
+            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            optionsBuilder.UseSqlite(connectionString);
         }
     }
 }

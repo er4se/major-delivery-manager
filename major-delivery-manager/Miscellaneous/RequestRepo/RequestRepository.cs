@@ -23,7 +23,6 @@ namespace major_delivery_manager
 
         public IEnumerable<RequestModel> GetAll()
         {
-            _DbContext.Database.EnsureCreated();
             _DbContext.Requests.Load();
             var collection = _DbContext.Requests.Local.ToObservableCollection();
 
@@ -37,8 +36,6 @@ namespace major_delivery_manager
 
         public RequestModel? GetById(string id)
         {
-            _DbContext.Database.EnsureCreated();
-
             if (_DbContext.Requests.Find(id) != null)
             {
                 var item = _DbContext.Requests.Find(id);
@@ -52,7 +49,6 @@ namespace major_delivery_manager
 
         public async Task Create(RequestModel entity)
         {
-            await _DbContext.Database.EnsureCreatedAsync();
             await _DbContext.Requests.LoadAsync();
 
             if (entity != null)
@@ -65,7 +61,6 @@ namespace major_delivery_manager
 
         public async Task Update(RequestModel entity)
         {
-            await _DbContext.Database.EnsureCreatedAsync();
             await _DbContext.Requests.LoadAsync();
 
             var realEntity = GetById(entity.Id);
@@ -80,7 +75,6 @@ namespace major_delivery_manager
 
         public void Delete(RequestModel entity)
         {
-            _DbContext.Database.EnsureCreated();
             _DbContext.Requests.Remove(entity);
             
             Save();
