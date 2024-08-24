@@ -204,7 +204,7 @@
                                     BlurRadius="1"/>
                                 </TextBlock.Effect>
                                 
-                                <Run Text="{Binding Request.State, Converter={StaticResource ButtonTextConverter}}"/>
+                                <Run Text="{Binding Request.Status, Converter={StaticResource ButtonTextConverter}}"/>
                             </TextBlock>
                             
                         </Button>
@@ -254,6 +254,12 @@
                                 </RadialGradientBrush>
                             </Button.Background>
 
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    Добавить нового курьера
+                                </ToolTip>
+                            </Button.ToolTip>
+
                             <Image Source="/Resources/add-icon.png"/>
 
                         </Button>
@@ -272,6 +278,12 @@
                                 </RadialGradientBrush>
                             </Button.Background>
 
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    Обновить список курьеров
+                                </ToolTip>
+                            </Button.ToolTip>
+
                             <Image Source="/Resources/refresh-icon.png"/>
 
                         </Button>
@@ -289,6 +301,12 @@
                                     <GradientStop Color="White" Offset="5"/>
                                 </RadialGradientBrush>
                             </Button.Background>
+
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    Закрепить курьера за заявкой
+                                </ToolTip>
+                            </Button.ToolTip>
 
                             <Image Source="/Resources/attach-icon.png"/>
 
@@ -532,6 +550,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
                                 <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Foreground="#303030" Grid.Column="0" Grid.Row="0"
@@ -650,6 +669,39 @@
                                 </TextBox.Background>
                             </TextBox>
 
+                            <Border Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 5, 25, 15">
+                                <Border.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                                </Border.BitmapEffect>
+                                <Button Command="{Binding ChangeRequestCommand}" Click="OnClosing_Click"
+                                    BorderThickness="0">
+                                    <Button.Background>
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="#ED9206" Offset="0.0"/>
+                                            <GradientStop Color="White" Offset="5"/>
+                                        </RadialGradientBrush>
+                                    </Button.Background>
+                                    <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect
+                                                ShadowDepth="1"
+                                                Direction="250"
+                                                Color="Black"
+                                                Opacity="0.5"
+                                                BlurRadius="1"/>
+                                        </TextBlock.Effect>
+                                            <Run Text="Сохранить параметры"/>
+                                    </TextBlock>
+
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            Изменения применятся если заявка имеет статус "НОВАЯ"
+                                        </ToolTip>
+                                    </Button.ToolTip>
+
+                                </Button>
+                            </Border>
+
                         </Grid>
                         <!--Stroke="#ACACAC"-->
 
@@ -657,65 +709,6 @@
                 </Border>
 
             </StackPanel>
-
-            <Grid Height="65">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="155"/>
-                    <ColumnDefinition Width="180"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="1" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 0, 15">
-                    <Border.BitmapEffect>
-                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
-                    </Border.BitmapEffect>
-                    <Button BorderThickness="0">
-                        <Button.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#921A00" Offset="0.0"/>
-                                <GradientStop Color="Black" Offset="5"/>
-                            </RadialGradientBrush>
-                        </Button.Background>
-                        <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                                ShadowDepth="1"
-                                Direction="250"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="1"/>
-                            </TextBlock.Effect>
-                        <Run Text="Сбросить"/>
-                        </TextBlock>
-                    </Button>
-                </Border>
-
-                <Border Grid.Column="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="25, 15, 25, 15">
-                    <Border.BitmapEffect>
-                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
-                    </Border.BitmapEffect>
-                    <Button Command="{Binding ChangeRequestCommand}" Click="OnClosing_Click"
-                        BorderThickness="0">
-                        <Button.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#ED9206" Offset="0.0"/>
-                                <GradientStop Color="White" Offset="5"/>
-                            </RadialGradientBrush>
-                        </Button.Background>
-                        <TextBlock Foreground="White" FontSize="14" FontFamily="Roboto" FontWeight="Medium">
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                                ShadowDepth="1"
-                                Direction="250"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="1"/>
-                            </TextBlock.Effect>
-                        <Run Text="Сохранить"/>
-                        </TextBlock>
-                    </Button>
-                </Border>
-            </Grid>
         </DockPanel>
     </Grid>
 </Window>

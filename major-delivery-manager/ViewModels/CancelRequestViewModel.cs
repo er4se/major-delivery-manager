@@ -71,7 +71,7 @@ namespace major_delivery_manager.ViewModels
                     Request.ChangeState(new RequestStateCanceled());
                     Request.CancellationModel = Cancel;
 
-                    await cancelRepo.Create(Cancel);
+                    await cancelRepo.Update(Cancel);
                     await requestRepo.Update(Request);
 
                     MessageBox.Show("Заявка отменена!");

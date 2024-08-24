@@ -101,15 +101,6 @@ namespace major_delivery_manager.ViewModels
             }
         }
 
-        private DelegateCommand abortRequestCommand;
-        public DelegateCommand AbortRequestCommand
-        {
-            get
-            {
-                return abortRequestCommand ?? (new DelegateCommand(OnAbortRequest, CanAbortRequest));
-            }
-        }
-
         private DelegateCommand assignCourierCommand;
         public DelegateCommand AssignCourierCommand
         {
@@ -173,11 +164,7 @@ namespace major_delivery_manager.ViewModels
                     }
             }
 
-            if (!flag)
-            {
-                MessageBox.Show("Неверный статус заявки или данные!");
-            }
-            else
+            if (flag)
             {
                 try
                 {
@@ -190,13 +177,6 @@ namespace major_delivery_manager.ViewModels
                     MessageBox.Show(ex.ToString());
                 }
             }
-        }
-
-        private bool CanAbortRequest() => true;
-
-        private void OnAbortRequest()
-        {
-            Clear();
         }
 
         private void OnLoadAddCourier()
@@ -266,13 +246,6 @@ namespace major_delivery_manager.ViewModels
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-        public void Clear()
-        {
-            var temp = Request.Id;
-            Request = new RequestModel();
-            Request.Id = temp;
         }
     }
 }

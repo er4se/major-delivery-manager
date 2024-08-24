@@ -1,5 +1,6 @@
 ﻿using major_delivery_manager.AppDbContext;
 using major_delivery_manager.Interfaces;
+using major_delivery_manager.Miscellaneous;
 using major_delivery_manager.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,7 +31,7 @@ namespace major_delivery_manager
 
             foreach ( var item in collection )
             {
-                item.EnsureState();
+                RequestStateConverter.FromString(item);
             }
 
             return new ObservableCollection<RequestModel>(collection);
@@ -41,7 +42,7 @@ namespace major_delivery_manager
             if (_DbContext.Requests.Find(id) != null)
             {
                 var item = _DbContext.Requests.Find(id);
-                item.EnsureState();
+                RequestStateConverter.FromString(item);
 
                 return item;
             }

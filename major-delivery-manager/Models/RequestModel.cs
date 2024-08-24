@@ -1,4 +1,5 @@
 ﻿using major_delivery_manager.Interfaces;
+using major_delivery_manager.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace major_delivery_manager.Models
         [NotMapped] private string selfcost;
         [NotMapped] private string amount;
 
-        public RequestCancellationModel CancellationModel { get; set; }
+        public RequestCancellationModel CancellationModel { get; set; } = new();
         public virtual CourierModel CourierModel { get; set; }
 
         //------------------------------------------//
@@ -175,23 +176,23 @@ namespace major_delivery_manager.Models
             ResponsibleId = courier.Id;
         }
 
-        public void EnsureState() 
-        {
-            switch (Status)
-            {
-                case "ВЫПОЛНЯЕТСЯ":
-                    _state = new RequestStateInProccess();
-                    break;
-                case "ВЫПОЛНЕНА":
-                    _state = new RequestStateDone();
-                    break;
-                case "ОТМЕНЕНА":
-                    _state = new RequestStateCanceled();
-                    break;
-                default:
-                    _state = new RequestStateNew();
-                    break;
-            }
-        }
+        //public void EnsureState() 
+        //{
+        //    switch (Status)
+        //    {
+        //        case "ВЫПОЛНЯЕТСЯ":
+        //            _state = new RequestStateInProccess();
+        //            break;
+        //        case "ВЫПОЛНЕНА":
+        //            _state = new RequestStateDone();
+        //            break;
+        //        case "ОТМЕНЕНА":
+        //            _state = new RequestStateCanceled();
+        //            break;
+        //        default:
+        //            _state = new RequestStateNew();
+        //            break;
+        //    }
+        //}
     }
 }

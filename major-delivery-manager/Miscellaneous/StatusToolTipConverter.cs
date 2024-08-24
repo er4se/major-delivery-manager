@@ -7,19 +7,17 @@ using System.Windows.Data;
 
 namespace major_delivery_manager.Miscellaneous
 {
-    internal class ButtonTextConverter : IValueConverter
+    internal class StatusToolTipConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var status = (string)value;
             switch (status)
             {
-                case "НОВАЯ":
-                    return "Начать";
-                case "ВЫПОЛНЯЕТСЯ":
-                    return "Выполнить";
+                case null:
+                    return "Комментариев нет";
                 default:
-                    return "Обновить";
+                    return ("Комментарий: " + status);
             }
         }
 
