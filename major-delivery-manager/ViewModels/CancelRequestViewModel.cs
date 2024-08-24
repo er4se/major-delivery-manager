@@ -56,8 +56,7 @@ namespace major_delivery_manager.ViewModels
             if(request != null)
             {
                 Request = request;
-                Cancel = new RequestCancellationModel();
-                Cancel.RequestModelId = request.Id;
+                Cancel = Request.CancellationModel;
             }
             else throw new ArgumentNullException(nameof(request));
         }
@@ -69,7 +68,6 @@ namespace major_delivery_manager.ViewModels
                 if ((!string.IsNullOrEmpty(Cancel.Comment)))
                 {
                     Request.ChangeState(new RequestStateCanceled());
-                    Request.CancellationModel = Cancel;
 
                     await cancelRepo.Update(Cancel);
                     await requestRepo.Update(Request);

@@ -37,16 +37,7 @@ namespace major_delivery_manager.Models
         [NotMapped] private string amount;
 
         public RequestCancellationModel CancellationModel { get; set; } = new();
-        public virtual CourierModel CourierModel { get; set; }
-
-        //------------------------------------------//
-        [NotMapped]
-        public RequestState State
-        {
-            get => GetState();
-            set { }
-        }
-        //------------------------------------------//
+        public CourierModel CourierModel { get; set; }
 
         public string Status
         {
@@ -175,24 +166,5 @@ namespace major_delivery_manager.Models
         {
             ResponsibleId = courier.Id;
         }
-
-        //public void EnsureState() 
-        //{
-        //    switch (Status)
-        //    {
-        //        case "ВЫПОЛНЯЕТСЯ":
-        //            _state = new RequestStateInProccess();
-        //            break;
-        //        case "ВЫПОЛНЕНА":
-        //            _state = new RequestStateDone();
-        //            break;
-        //        case "ОТМЕНЕНА":
-        //            _state = new RequestStateCanceled();
-        //            break;
-        //        default:
-        //            _state = new RequestStateNew();
-        //            break;
-        //    }
-        //}
     }
 }

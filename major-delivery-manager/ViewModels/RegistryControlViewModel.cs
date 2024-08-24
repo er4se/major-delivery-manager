@@ -23,7 +23,6 @@ namespace major_delivery_manager.ViewModels
         public IMainWindowsCodeBehind CodeBehind { get; set; }
 
         private IRepository<RequestModel> repository;
-        private IRepository<RequestCancellationModel> cancelRepo;
 
         private string searchTerm;
         public string SearchTerm
@@ -61,6 +60,20 @@ namespace major_delivery_manager.ViewModels
                 }
 
                 return filterRegistryCommand;
+            }
+        }
+
+        private DelegateCommand refreshRegistryCommand;
+        public DelegateCommand RefreshRegistryCommand
+        {
+            get
+            {
+                if (refreshRegistryCommand == null)
+                {
+                    refreshRegistryCommand = new DelegateCommand(OnRefreshRegistry);
+                }
+
+                return refreshRegistryCommand;
             }
         }
 
@@ -108,7 +121,6 @@ namespace major_delivery_manager.ViewModels
             mainCodeBehind = codeBehind;
 
             repository = new RequestRepository();
-            cancelRepo = new CancelRepository();
             Registry = new ObservableCollection<RequestModel>(repository.GetAll());
         }
 
@@ -136,6 +148,13 @@ namespace major_delivery_manager.ViewModels
             {
                 MessageBox.Show("Возможно удаление только выполненых и отмененных заявок");
             }
+        }
+
+        private void OnRefreshRegistry()
+        {
+            repository = new RequestRepository();
+            Registry = new ObservableCollection<RequestModel>(repository.GetAll());
+            OnFilterRegistry();
         }
 
         private bool ContainsSearchTerm(RequestModel request)

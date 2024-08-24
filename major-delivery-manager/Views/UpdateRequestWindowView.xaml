@@ -229,7 +229,7 @@
                                 Opacity="0.5"
                                 BlurRadius="1"/>
                         </TextBlock.Effect>      
-                        <Run Text="Назначить курьера:"/>
+                        <Run Text="Курьер:"/>
                     </TextBlock>
 
                     <Rectangle Height="1" Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Fill="#484848" Margin="25,0,25, 0"/>

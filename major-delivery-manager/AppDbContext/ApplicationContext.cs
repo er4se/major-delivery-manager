@@ -34,6 +34,11 @@ namespace major_delivery_manager.AppDbContext
                 .WithOne(r => r.Request)
                 .HasForeignKey<RequestCancellationModel>(r => r.RequestModelId);
 
+            modelBuilder.Entity<CourierModel>()
+                .HasMany(m => m.RequestModels)
+                .WithOne(r => r.CourierModel)
+                .HasForeignKey(r => r.ResponsibleId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

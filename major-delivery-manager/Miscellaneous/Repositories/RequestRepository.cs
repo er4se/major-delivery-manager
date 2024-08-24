@@ -27,6 +27,7 @@ namespace major_delivery_manager
             _DbContext.Requests.Load();
             var collection = _DbContext.Requests
                 .Include(r => r.CancellationModel)
+                .Include(r => r.CourierModel)
                 .ToList();
 
             foreach ( var item in collection )
@@ -41,7 +42,10 @@ namespace major_delivery_manager
         {
             if (_DbContext.Requests.Find(id) != null)
             {
-                var item = _DbContext.Requests.Find(id);
+                var item = _DbContext.Requests.Include(r => r.CancellationModel)
+                    .Include(r => r.CourierModel)
+                    .FirstOrDefault(x => x.Id == id);
+
                 RequestStateConverter.FromString(item);
 
                 return item;

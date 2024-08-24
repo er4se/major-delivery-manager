@@ -10,6 +10,7 @@
 
     <UserControl.Resources>
         <misc:StatusToolTipConverter x:Key="StatusToolTipConverter"/>
+        <misc:CourierInfoConverter x:Key="CourierInfoConverter"/>
     </UserControl.Resources>
     
     <Grid Background="#ECECEC">
@@ -61,7 +62,6 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0"  Height="35" VerticalAlignment="Bottom">
-                <!--StrokeThickness="1" Stroke="#303030"-->
                 <Grid.Background>
                     <RadialGradientBrush>
                         <GradientStop Color="#484848" Offset="0.0"/>
@@ -100,6 +100,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="36"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="36"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
 
@@ -115,7 +116,31 @@
                 <TextBox Text="{Binding SearchTerm, Mode=OneWayToSource}"
                     Grid.Column="1" Margin="0,5,5,5" Foreground="#303030" Padding="3" CaretBrush="#303030" Background="White"/>
 
-                <Border Grid.Column="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="3,5,13,5">
+                <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="#ACACAC" Margin="5">
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
+                    </Border.BitmapEffect>
+                    <Button Command="{Binding RefreshRegistryCommand}"
+                            BorderThickness="0">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#ED9206" Offset="0.0"/>
+                                <GradientStop Color="White" Offset="5"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+
+                        <Button.ToolTip>
+                            <ToolTip>
+                                Обновить список
+                            </ToolTip>
+                        </Button.ToolTip>
+
+                        <Image Source="/Resources/refresh-icon.png"/>
+
+                    </Button>
+                </Border>
+
+                <Border Grid.Column="3" BorderThickness="1" BorderBrush="#ACACAC" Margin="5,5,10,5">
                     <Border.BitmapEffect>
                         <DropShadowBitmapEffect Color="Black" Direction="200" ShadowDepth="2" Opacity="0.2" Softness="2" />
                     </Border.BitmapEffect>
@@ -164,6 +189,10 @@
                                     <ColumnDefinition Width="auto" MinWidth="100"/>
                                     <ColumnDefinition Width="auto" MinWidth="100"/>
                                 </Grid.ColumnDefinitions>
+
+                                <Grid.ToolTip>
+                                    <ToolTip Content="{Binding CourierModel, Converter={StaticResource CourierInfoConverter}}"/>
+                                </Grid.ToolTip>
 
                                 <TextBlock Foreground="#303030" Grid.Column="0"
                                 Margin="25,0"
